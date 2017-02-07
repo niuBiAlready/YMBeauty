@@ -1,0 +1,33 @@
+//
+//  PrefixHeader.pch
+//  YouMiBeauty
+//
+//  Created by Soo on 2017/1/18.
+//  Copyright © 2017年 王涛. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "AppDelegate.h"
+
+#import "AFNetworking.h"
+#import "UIImageView+AFNetworking.h"
+#import "Config.h"
+#import "UtilityFunc.h"
+#import "UIView+SDAutoLayout.h"
+#import "UITableView+SDAutoTableViewCellHeight.h"
+#import "UIImageView+WebCache.h"
+#import "YTKChainRequest.h"
+#import "YTKBatchRequest.h"
+#import "UIButton+EnlargeTouchArea.h"
+#import "NSString+YMSecrityUtils.h"
+#import "YMCommonUtils.h"
+
+#import "MJExtension.h"
+#import "MJRefresh.h"
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* PrefixHeader_pch */
