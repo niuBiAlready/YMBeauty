@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C97929E1E4C4AF20013547E /* YMManagerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C97929D1E4C4AF20013547E /* YMManagerViewCell.m */; };
 		E3F85F77369B552DACA4B301 /* libPods-YouMiBeauty.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6C251439762D4E0B67B2AF /* libPods-YouMiBeauty.a */; };
 		EB0555781E3460E80004F9FE /* YMHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB0555771E3460E80004F9FE /* YMHomeViewController.m */; };
 		EB05557E1E3461870004F9FE /* YMHomeMainCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB05557D1E3461870004F9FE /* YMHomeMainCollectionViewCell.m */; };
@@ -89,6 +90,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C97929C1E4C4AF20013547E /* YMManagerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMManagerViewCell.h; sourceTree = "<group>"; };
+		4C97929D1E4C4AF20013547E /* YMManagerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMManagerViewCell.m; sourceTree = "<group>"; };
 		9E6C251439762D4E0B67B2AF /* libPods-YouMiBeauty.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YouMiBeauty.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE495CA856065EAE431BD8C3 /* Pods-YouMiBeauty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouMiBeauty.release.xcconfig"; path = "Pods/Target Support Files/Pods-YouMiBeauty/Pods-YouMiBeauty.release.xcconfig"; sourceTree = "<group>"; };
 		E6041A08F36319C8854A32A5 /* Pods-YouMiBeauty.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouMiBeauty.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YouMiBeauty/Pods-YouMiBeauty.debug.xcconfig"; sourceTree = "<group>"; };
@@ -317,6 +320,22 @@
 				BE495CA856065EAE431BD8C3 /* Pods-YouMiBeauty.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		4C97929A1E4C4AC80013547E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4C97929B1E4C4AC80013547E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4C97929C1E4C4AF20013547E /* YMManagerViewCell.h */,
+				4C97929D1E4C4AF20013547E /* YMManagerViewCell.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		AB7394A6C9C210BBBF78088F /* Frameworks */ = {
@@ -588,6 +607,8 @@
 		EBE3A5851E3347350098B5DD /* ManageClass */ = {
 			isa = PBXGroup;
 			children = (
+				4C97929A1E4C4AC80013547E /* Models */,
+				4C97929B1E4C4AC80013547E /* Views */,
 				EBE3A5921E3349AC0098B5DD /* YMManageViewController.h */,
 				EBE3A5931E3349AC0098B5DD /* YMManageViewController.m */,
 			);
@@ -970,6 +991,7 @@
 			files = (
 				EBE3A7A71E336F250098B5DD /* Base64.m in Sources */,
 				EB7F0C881E3742B100061A56 /* DateCalenCollectionViewCell.m in Sources */,
+				4C97929E1E4C4AF20013547E /* YMManagerViewCell.m in Sources */,
 				EBE3A59B1E3355390098B5DD /* YMCommonUtils.m in Sources */,
 				EBE3A58E1E3349800098B5DD /* YMCustomerViewController.m in Sources */,
 				EB8F03731E35EC820081F5EC /* WaitingConfirmationModel.m in Sources */,

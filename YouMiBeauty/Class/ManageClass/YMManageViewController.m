@@ -7,8 +7,16 @@
 //
 
 #import "YMManageViewController.h"
+#import "YMManagerViewCell.h"
 
-@interface YMManageViewController ()
+#define CellString @"YMManagerViewCell"
+
+@interface YMManageViewController ()<UITableViewDelegate,UITableViewDataSource>
+
+
+@property(nonatomic, strong) UITableView * tableView;
+
+@property(nonatomic, strong) NSMutableArray * dataArray;
 
 @end
 
@@ -16,12 +24,44 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self configUI];
+    
+    
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+- (void)configUI{
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, self.view.width, self.view.height - 64) style:(UITableViewStylePlain)];
+    [self.tableView registerClass:[YMManagerViewCell class] forCellReuseIdentifier:CellString];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self.tableView setTableFooterView:[UIView new]];
+    [self.view addSubview:self.tableView];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 3;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    YMManagerViewCell *cell;
+    if (cell == nil) {
+        cell = [tableView dequeueReusableCellWithIdentifier:CellString];
+        
+    }
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 44;
+}
+
+- (NSMutableArray *)dataArray{
+    if (_dataArray == nil) {
+        _dataArray = [NSMutableArray new];
+    }
+    return _dataArray;
 }
 
 /*
