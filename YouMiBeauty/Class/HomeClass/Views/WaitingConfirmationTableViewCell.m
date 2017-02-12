@@ -22,6 +22,16 @@
     _statusLabel.text = model.status;
     [self setSubViews];
 }
+-(void)setModelForCellNoBtn:(WaitingConfirmationModel *)model{
+
+    _nameLabel.text = model.name;
+    _descriptionLabel.text = model.descriptionText;
+    _dateLabel.text = model.date;
+    _timeLabel.text = model.time;
+    _statusLabel.text = model.status;
+    
+    [self setNoBtnSubViews];
+}
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
 
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -74,6 +84,58 @@
     }
     return self;
 }
+//没有按钮
+- (void)setNoBtnSubViews{
+    
+    _backView.sd_layout
+    .topSpaceToView(self,0)
+    .leftSpaceToView(self,0)
+    .widthIs(SCREEN_WIDTH)
+    .heightIs(W(130));
+    
+    _dateLabel.adjustsFontSizeToFitWidth = YES;
+    _dateLabel.sd_layout
+    .bottomSpaceToView(_backView,W(130)/2+5)
+    .leftSpaceToView(_backView,LeftRange)
+    .widthIs(14*3)
+    .heightIs(14);
+    
+    _timeLabel.adjustsFontSizeToFitWidth = YES;
+    _timeLabel.sd_layout
+    .topSpaceToView(_backView,W(130)/2+5)
+    .leftSpaceToView(_backView,LeftRange)
+    .widthIs(14*3)
+    .heightIs(14);
+    
+    UIImage *headerImage = [UIImage imageNamed:@"icon_home_customerpic"];
+    [_headImageView setImage:headerImage];
+    _headImageView.layer.cornerRadius = W(40);
+    _headImageView.sd_layout
+    .centerYEqualToView(_backView)
+    .leftSpaceToView(_dateLabel,LeftRange)
+    .widthIs(W(80))
+    .heightIs(W(80));
+    
+    _statusLabel.sd_layout
+    .topSpaceToView(_backView,W(30))
+    .rightSpaceToView(_backView,LeftRange)
+    .widthIs(12*5)
+    .heightIs(14);
+    
+    _nameLabel.sd_layout
+    .bottomSpaceToView(_backView,W(130)/2+5)
+    .leftSpaceToView(_headImageView,LeftRange)
+    .rightSpaceToView(_statusLabel,5)
+    .heightIs(16);
+    
+    _descriptionLabel.adjustsFontSizeToFitWidth = YES;
+    _descriptionLabel.sd_layout
+    .topSpaceToView(_backView,W(130)/2+5)
+    .leftEqualToView(_nameLabel)
+    .rightSpaceToView(_backView,LeftRange)
+    .heightIs(14);
+}
+//有按钮
 - (void)setSubViews{
 
     _backView.sd_layout

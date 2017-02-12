@@ -30,6 +30,8 @@
 		EB8F03731E35EC820081F5EC /* WaitingConfirmationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EB8F03721E35EC820081F5EC /* WaitingConfirmationModel.m */; };
 		EBABABCF1E2FB96600E94F2E /* YMBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBABABCE1E2FB96600E94F2E /* YMBaseViewController.m */; };
 		EBABABD21E2FB9C100E94F2E /* YMCustomNaviBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = EBABABD11E2FB9C100E94F2E /* YMCustomNaviBarView.m */; };
+		EBDA0A421E50BCAF00A96428 /* YMBeautyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA0A411E50BCAF00A96428 /* YMBeautyDetailViewController.m */; };
+		EBDA0A451E50BD6700A96428 /* YMBeautyDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA0A441E50BD6700A96428 /* YMBeautyDetailCell.m */; };
 		EBE3A5631E333F710098B5DD /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE3A5621E333F710098B5DD /* UIView+Extension.m */; };
 		EBE3A5691E3342D70098B5DD /* UIButton+EnlargeTouchArea.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE3A5681E3342D70098B5DD /* UIButton+EnlargeTouchArea.m */; };
 		EBE3A56F1E3344020098B5DD /* YMNavigationContrller.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE3A56E1E3344020098B5DD /* YMNavigationContrller.m */; };
@@ -139,6 +141,10 @@
 		EBABABD11E2FB9C100E94F2E /* YMCustomNaviBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMCustomNaviBarView.m; sourceTree = "<group>"; };
 		EBABABD41E2FBC7100E94F2E /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		EBABABD51E2FBC8F00E94F2E /* Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
+		EBDA0A401E50BCAF00A96428 /* YMBeautyDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMBeautyDetailViewController.h; sourceTree = "<group>"; };
+		EBDA0A411E50BCAF00A96428 /* YMBeautyDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMBeautyDetailViewController.m; sourceTree = "<group>"; };
+		EBDA0A431E50BD6700A96428 /* YMBeautyDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMBeautyDetailCell.h; sourceTree = "<group>"; };
+		EBDA0A441E50BD6700A96428 /* YMBeautyDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMBeautyDetailCell.m; sourceTree = "<group>"; };
 		EBE3A5611E333F710098B5DD /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		EBE3A5621E333F710098B5DD /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		EBE3A5671E3342D70098B5DD /* UIButton+EnlargeTouchArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+EnlargeTouchArea.h"; sourceTree = "<group>"; };
@@ -640,6 +646,8 @@
 				EBE3A58A1E33496B0098B5DD /* YMHomeMainViewController.m */,
 				EB0555761E3460E80004F9FE /* YMHomeViewController.h */,
 				EB0555771E3460E80004F9FE /* YMHomeViewController.m */,
+				EBDA0A401E50BCAF00A96428 /* YMBeautyDetailViewController.h */,
+				EBDA0A411E50BCAF00A96428 /* YMBeautyDetailViewController.m */,
 				EBE3A6851E3369960098B5DD /* Models */,
 				EBE3A6861E3369960098B5DD /* Views */,
 			);
@@ -675,6 +683,8 @@
 				EB05557D1E3461870004F9FE /* YMHomeMainCollectionViewCell.m */,
 				EB8F036B1E35EBC80081F5EC /* WaitingConfirmationTableViewCell.h */,
 				EB8F036C1E35EBC80081F5EC /* WaitingConfirmationTableViewCell.m */,
+				EBDA0A431E50BD6700A96428 /* YMBeautyDetailCell.h */,
+				EBDA0A441E50BD6700A96428 /* YMBeautyDetailCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1000,6 +1010,8 @@
 				EBE3A5811E33454A0098B5DD /* LCTabBarCONST.m in Sources */,
 				EBE3A7A81E336F250098B5DD /* DataSigner.m in Sources */,
 				EBE3A6841E3366910098B5DD /* YMReachability.m in Sources */,
+				EBDA0A421E50BCAF00A96428 /* YMBeautyDetailViewController.m in Sources */,
+				EBDA0A451E50BD6700A96428 /* YMBeautyDetailCell.m in Sources */,
 				EBE3A5841E33454A0098B5DD /* LCTabBarItem.m in Sources */,
 				EBE3A5801E33454A0098B5DD /* LCTabBarBadge.m in Sources */,
 				EBE3A6811E3366590098B5DD /* MBProgressHUD.m in Sources */,

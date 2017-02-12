@@ -48,4 +48,5 @@
 @property(nonatomic,strong) WaitingConfirmationModel *model;
 @property(nonatomic,strong)void(^selectedBlock)(NSIndexPath*indexPath,BOOL isSelected,NSString *employment_userID);
 - (void)setModelForCell:(WaitingConfirmationModel *)model;
+- (void)setModelForCellNoBtn:(WaitingConfirmationModel *)model;
 @end
