@@ -24,6 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.viewNaviBar setAlpha:0];
     [self configUI];
     
     

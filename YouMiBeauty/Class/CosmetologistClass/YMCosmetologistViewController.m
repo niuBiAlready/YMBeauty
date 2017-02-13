@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.viewNaviBar setAlpha:0];
     // Do any additional setup after loading the view.
 }
 
