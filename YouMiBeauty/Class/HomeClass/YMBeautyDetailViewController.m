@@ -7,6 +7,7 @@
 //
 
 #import "YMBeautyDetailViewController.h"
+#import "YMBeautyDetailCell.h"
 
 @interface YMBeautyDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) UITableView         * tableView;
@@ -25,11 +26,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.viewNaviBar setTitle:@"记录详情"];
+    
+    [self.view addSubview:self.tableView];
     // Do any additional setup after loading the view.
 }
 -(UITableView*)tableView
 {
     CGRect frame = self.view.bounds;
+    frame.origin.y = NavBarHeight;
     frame.size.height = SCREEN_HEIGHT-NavBarHeight;
     if (!_tableView) {
         _tableView = [[UITableView alloc]initWithFrame:frame style:UITableViewStyleGrouped];
@@ -37,11 +41,39 @@
         _tableView.dataSource = self;
         _tableView.showsVerticalScrollIndicator = NO;
         _tableView.backgroundColor = UIColorFromRGB(0xf0f0f0);
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
     }
     return _tableView;
 }
+
+#pragma tableViewDelegate
+- (NSInteger )numberOfSectionsInTableView:(UITableView *)tableView{
+
+    return 3;
+}
+- (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+
+    return 3;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    static NSString *ID = @"beautyDetailCellIdentifier";
+    YMBeautyDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (!cell) {
+        cell = [[YMBeautyDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+    }
+    
+    return cell;
+    
+}
+
+- (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    return 40;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

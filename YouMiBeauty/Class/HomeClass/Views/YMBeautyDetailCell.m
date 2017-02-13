@@ -10,6 +10,20 @@
 
 @implementation YMBeautyDetailCell
 
+
+- (instancetype) initWithFrame:(CGRect)frame{
+
+    self = [super initWithFrame:frame];
+    if (self) {
+        
+        self.backgroundColor = [UIColor redColor];
+    }
+    return self;
+}
+- (void)layoutSubviews{
+
+    
+}
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

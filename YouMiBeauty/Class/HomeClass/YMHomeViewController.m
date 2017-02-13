@@ -13,6 +13,8 @@
 //流水明细
 #import "MonthSelectView.h"
 //套餐到期
+//详情
+#import "YMBeautyDetailViewController.h"
 @interface YMHomeViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 //等待确认
 @property(nonatomic,strong) UITableView         * tableView;
@@ -197,8 +199,7 @@
         _tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
         _tableView.delegate =self;
         _tableView.dataSource = self;
-        _tableView.sectionIndexBackgroundColor = [UIColor clearColor];
-        _tableView.sectionIndexTrackingBackgroundColor=[UIColor clearColor];
+        _tableView.backgroundColor = [UIColor clearColor];
     }
     return _tableView;
 }
@@ -249,8 +250,6 @@
     
     cell.indexPath = indexPath;
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     WaitingConfirmationModel *model = [WaitingConfirmationModel new];
     if (_currentIndex == 0) {
         
@@ -293,9 +292,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSLog(@"%ld",_currentIndex);
     if (_currentIndex == 0) {
         
-
+        YMBeautyDetailViewController *detaiVC = [YMBeautyDetailViewController new];
+        [self.navigationController pushViewController:detaiVC animated:YES];
     }else if (_currentIndex == 1){
         
 
