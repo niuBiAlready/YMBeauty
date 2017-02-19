@@ -36,11 +36,10 @@
     frame.origin.y = NavBarHeight;
     frame.size.height = SCREEN_HEIGHT-NavBarHeight;
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:frame style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc]initWithFrame:frame style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.showsVerticalScrollIndicator = NO;
-        _tableView.backgroundColor = UIColorFromRGB(0xf0f0f0);
+        _tableView.backgroundColor = [UIColor clearColor];
 //        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
     }
@@ -50,7 +49,7 @@
 #pragma tableViewDelegate
 - (NSInteger )numberOfSectionsInTableView:(UITableView *)tableView{
 
-    return 3;
+    return 1;
 }
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 
@@ -64,6 +63,8 @@
     if (!cell) {
         cell = [[YMBeautyDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    [cell configCellWithModel:ID];
     
     return cell;
     

@@ -10,4 +10,8 @@
 
 @interface YMBeautyDetailCell : UITableViewCell
 
+@property(nonatomic,strong) UILabel *titleLabel;
+@property(nonatomic,strong) UILabel *detailLabel;
+
+- (void)configCellWithModel:(id)model;
 @end
