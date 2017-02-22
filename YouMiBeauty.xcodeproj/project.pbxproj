@@ -20,6 +20,9 @@
 		EB12F20C1E2DFC3C0094CA3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB12F20A1E2DFC3C0094CA3E /* LaunchScreen.storyboard */; };
 		EB12F2171E2DFC3C0094CA3E /* YouMiBeautyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB12F2161E2DFC3C0094CA3E /* YouMiBeautyTests.m */; };
 		EB12F2221E2DFC3C0094CA3E /* YouMiBeautyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB12F2211E2DFC3C0094CA3E /* YouMiBeautyUITests.m */; };
+		EB51E6D21E5C800F007F5D9B /* YMCustomerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB51E6D11E5C800F007F5D9B /* YMCustomerCell.m */; };
+		EB51E6D51E5C804E007F5D9B /* YMCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EB51E6D41E5C804E007F5D9B /* YMCustomerModel.m */; };
+		EB51E6DB1E5C90E7007F5D9B /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51E6D91E5C90E7007F5D9B /* pinyin.c */; };
 		EB7F0C721E3728CF00061A56 /* CALayer+LXAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = EB7F0C6D1E3728CF00061A56 /* CALayer+LXAdd.m */; };
 		EB7F0C731E3728CF00061A56 /* NSString+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = EB7F0C6F1E3728CF00061A56 /* NSString+Size.m */; };
 		EB7F0C741E3728CF00061A56 /* YMTopBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB7F0C711E3728CF00061A56 /* YMTopBarView.m */; };
@@ -119,6 +122,12 @@
 		EB12F21D1E2DFC3C0094CA3E /* YouMiBeautyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YouMiBeautyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB12F2211E2DFC3C0094CA3E /* YouMiBeautyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YouMiBeautyUITests.m; sourceTree = "<group>"; };
 		EB12F2231E2DFC3C0094CA3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB51E6D01E5C800F007F5D9B /* YMCustomerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMCustomerCell.h; sourceTree = "<group>"; };
+		EB51E6D11E5C800F007F5D9B /* YMCustomerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMCustomerCell.m; sourceTree = "<group>"; };
+		EB51E6D31E5C804E007F5D9B /* YMCustomerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMCustomerModel.h; sourceTree = "<group>"; };
+		EB51E6D41E5C804E007F5D9B /* YMCustomerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMCustomerModel.m; sourceTree = "<group>"; };
+		EB51E6D91E5C90E7007F5D9B /* pinyin.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = pinyin.c; sourceTree = "<group>"; };
+		EB51E6DA1E5C90E7007F5D9B /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
 		EB7F0C6C1E3728CF00061A56 /* CALayer+LXAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+LXAdd.h"; sourceTree = "<group>"; };
 		EB7F0C6D1E3728CF00061A56 /* CALayer+LXAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+LXAdd.m"; sourceTree = "<group>"; };
 		EB7F0C6E1E3728CF00061A56 /* NSString+Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Size.h"; sourceTree = "<group>"; };
@@ -426,6 +435,24 @@
 			path = YouMiBeautyUITests;
 			sourceTree = "<group>";
 		};
+		EB51E6CE1E5C7FD3007F5D9B /* CustomerModel */ = {
+			isa = PBXGroup;
+			children = (
+				EB51E6D31E5C804E007F5D9B /* YMCustomerModel.h */,
+				EB51E6D41E5C804E007F5D9B /* YMCustomerModel.m */,
+			);
+			name = CustomerModel;
+			sourceTree = "<group>";
+		};
+		EB51E6CF1E5C7FDB007F5D9B /* CustomerCell */ = {
+			isa = PBXGroup;
+			children = (
+				EB51E6D01E5C800F007F5D9B /* YMCustomerCell.h */,
+				EB51E6D11E5C800F007F5D9B /* YMCustomerCell.m */,
+			);
+			name = CustomerCell;
+			sourceTree = "<group>";
+		};
 		EB7F0C6A1E3728CF00061A56 /* TopSegment */ = {
 			isa = PBXGroup;
 			children = (
@@ -545,6 +572,8 @@
 			children = (
 				EB0D53E81E31D78500445A76 /* UtilityFunc.h */,
 				EB0D53E91E31D78500445A76 /* UtilityFunc.m */,
+				EB51E6D91E5C90E7007F5D9B /* pinyin.c */,
+				EB51E6DA1E5C90E7007F5D9B /* pinyin.h */,
 			);
 			path = PublicClass;
 			sourceTree = "<group>";
@@ -635,6 +664,8 @@
 			children = (
 				EBE3A58C1E3349800098B5DD /* YMCustomerViewController.h */,
 				EBE3A58D1E3349800098B5DD /* YMCustomerViewController.m */,
+				EB51E6CF1E5C7FDB007F5D9B /* CustomerCell */,
+				EB51E6CE1E5C7FD3007F5D9B /* CustomerModel */,
 			);
 			path = CustomerClass;
 			sourceTree = "<group>";
@@ -1002,6 +1033,7 @@
 				EBE3A7A71E336F250098B5DD /* Base64.m in Sources */,
 				EB7F0C881E3742B100061A56 /* DateCalenCollectionViewCell.m in Sources */,
 				4C97929E1E4C4AF20013547E /* YMManagerViewCell.m in Sources */,
+				EB51E6D21E5C800F007F5D9B /* YMCustomerCell.m in Sources */,
 				EBE3A59B1E3355390098B5DD /* YMCommonUtils.m in Sources */,
 				EBE3A58E1E3349800098B5DD /* YMCustomerViewController.m in Sources */,
 				EB8F03731E35EC820081F5EC /* WaitingConfirmationModel.m in Sources */,
@@ -1012,6 +1044,7 @@
 				EBE3A6841E3366910098B5DD /* YMReachability.m in Sources */,
 				EBDA0A421E50BCAF00A96428 /* YMBeautyDetailViewController.m in Sources */,
 				EBDA0A451E50BD6700A96428 /* YMBeautyDetailCell.m in Sources */,
+				EB51E6DB1E5C90E7007F5D9B /* pinyin.c in Sources */,
 				EBE3A5841E33454A0098B5DD /* LCTabBarItem.m in Sources */,
 				EBE3A5801E33454A0098B5DD /* LCTabBarBadge.m in Sources */,
 				EBE3A6811E3366590098B5DD /* MBProgressHUD.m in Sources */,
@@ -1043,6 +1076,7 @@
 				EBE3A5981E33538B0098B5DD /* YMGuideViewController.m in Sources */,
 				EBE3A59E1E3355D00098B5DD /* NSString+YMSecrityUtils.m in Sources */,
 				EBE3A57F1E33454A0098B5DD /* LCTabBar.m in Sources */,
+				EB51E6D51E5C804E007F5D9B /* YMCustomerModel.m in Sources */,
 				EB12F1FE1E2DFC3B0094CA3E /* main.m in Sources */,
 				EBE3A7A91E336F250098B5DD /* DataVerifier.m in Sources */,
 			);

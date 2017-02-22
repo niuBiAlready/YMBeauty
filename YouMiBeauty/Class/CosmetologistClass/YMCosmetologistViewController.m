@@ -7,7 +7,7 @@
 //
 
 #import "YMCosmetologistViewController.h"
-
+#import "pinyin.h"
 @interface YMCosmetologistViewController ()
 
 @end
@@ -16,7 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.viewNaviBar setAlpha:0];
+//    [self.viewNaviBar setAlpha:0];
+    [self.viewNaviBar setTitle:@"美容师"];
+    [self hiddenBackBtn:YES];
     // Do any additional setup after loading the view.
 }
 
