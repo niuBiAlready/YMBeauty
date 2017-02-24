@@ -40,7 +40,10 @@
     [self.tableView setTableFooterView:[UIView new]];
     [self.view addSubview:self.tableView];
 }
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
 
+    return 3;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 3;
 }

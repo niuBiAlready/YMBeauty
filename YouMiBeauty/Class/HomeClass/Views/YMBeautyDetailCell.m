@@ -39,6 +39,8 @@
 }
 - (void)layoutSubviews{
 
+    [super layoutSubviews];
+    
     _titleLabel.sd_layout
     .centerYEqualToView(self.contentView)
     .leftSpaceToView(self.contentView,10)

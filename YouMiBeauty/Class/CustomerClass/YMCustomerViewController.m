@@ -84,8 +84,7 @@
         _tableView = [[UITableView alloc]initWithFrame:frame style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.backgroundColor = UIColorFromRGB(0xffffff);
-        _tableView.separatorColor = [UIColor redColor];
+        _tableView.backgroundColor = [UIColor clearColor];
         _tableView.sectionIndexBackgroundColor = [UIColor clearColor];
         _tableView.sectionIndexTrackingBackgroundColor=[UIColor clearColor];
         _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -204,7 +203,7 @@
      *  请求数据
      */
     
-    NSArray *data = @[@{@"uid":@"1",@"nickname":@"阿猫",@"picurl":@"http://xiuxin-1253234316.costj.myqcloud.com/giftImages/header.png"}];
+    NSArray *data = @[@{@"uid":@"1",@"nickname":@"阿猫",@"picurl":@"http://xiuxin-1253234316.costj.myqcloud.com/giftImages/header.png"},@{@"uid":@"2",@"nickname":@"阿狗",@"picurl":@"http://xiuxin-1253234316.costj.myqcloud.com/giftImages/header.png"}];
     [self.dataSource addObjectsFromArray:[YMCustomerModel mj_objectArrayWithKeyValuesArray:data]];
     
     [self sortDatas];

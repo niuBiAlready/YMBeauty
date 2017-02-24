@@ -41,6 +41,8 @@
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor clearColor];
 //        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+
         
     }
     return _tableView;
@@ -49,7 +51,7 @@
 #pragma tableViewDelegate
 - (NSInteger )numberOfSectionsInTableView:(UITableView *)tableView{
 
-    return 1;
+    return 3;
 }
 - (NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 

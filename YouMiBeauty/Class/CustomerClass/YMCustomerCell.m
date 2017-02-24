@@ -38,6 +38,8 @@
 }
 - (void)layoutSubviews{
     
+    [super layoutSubviews];
+    
     _backView.sd_layout
     .topSpaceToView(self,0)
     .leftSpaceToView(self,0)
