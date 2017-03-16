@@ -20,6 +20,7 @@
 		EB12F20C1E2DFC3C0094CA3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB12F20A1E2DFC3C0094CA3E /* LaunchScreen.storyboard */; };
 		EB12F2171E2DFC3C0094CA3E /* YouMiBeautyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB12F2161E2DFC3C0094CA3E /* YouMiBeautyTests.m */; };
 		EB12F2221E2DFC3C0094CA3E /* YouMiBeautyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB12F2211E2DFC3C0094CA3E /* YouMiBeautyUITests.m */; };
+		EB1A87B01E7983C90000F9B4 /* YMUserInfoAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = EB1A87AF1E7983C90000F9B4 /* YMUserInfoAPI.m */; };
 		EB51E6D21E5C800F007F5D9B /* YMCustomerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB51E6D11E5C800F007F5D9B /* YMCustomerCell.m */; };
 		EB51E6D51E5C804E007F5D9B /* YMCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EB51E6D41E5C804E007F5D9B /* YMCustomerModel.m */; };
 		EB51E6DB1E5C90E7007F5D9B /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51E6D91E5C90E7007F5D9B /* pinyin.c */; };
@@ -31,6 +32,7 @@
 		EB8F036D1E35EBC80081F5EC /* WaitingConfirmationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB8F036C1E35EBC80081F5EC /* WaitingConfirmationTableViewCell.m */; };
 		EB8F03701E35EC350081F5EC /* YMBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EB8F036F1E35EC350081F5EC /* YMBaseModel.m */; };
 		EB8F03731E35EC820081F5EC /* WaitingConfirmationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EB8F03721E35EC820081F5EC /* WaitingConfirmationModel.m */; };
+		EBA7EFDF1E71B4CB00D4FF86 /* YMBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EBA7EFDE1E71B4CB00D4FF86 /* YMBaseRequest.m */; };
 		EBABABCF1E2FB96600E94F2E /* YMBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBABABCE1E2FB96600E94F2E /* YMBaseViewController.m */; };
 		EBABABD21E2FB9C100E94F2E /* YMCustomNaviBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = EBABABD11E2FB9C100E94F2E /* YMCustomNaviBarView.m */; };
 		EBDA0A421E50BCAF00A96428 /* YMBeautyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA0A411E50BCAF00A96428 /* YMBeautyDetailViewController.m */; };
@@ -122,6 +124,8 @@
 		EB12F21D1E2DFC3C0094CA3E /* YouMiBeautyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YouMiBeautyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB12F2211E2DFC3C0094CA3E /* YouMiBeautyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YouMiBeautyUITests.m; sourceTree = "<group>"; };
 		EB12F2231E2DFC3C0094CA3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB1A87AE1E7983C90000F9B4 /* YMUserInfoAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMUserInfoAPI.h; sourceTree = "<group>"; };
+		EB1A87AF1E7983C90000F9B4 /* YMUserInfoAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMUserInfoAPI.m; sourceTree = "<group>"; };
 		EB51E6D01E5C800F007F5D9B /* YMCustomerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMCustomerCell.h; sourceTree = "<group>"; };
 		EB51E6D11E5C800F007F5D9B /* YMCustomerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMCustomerCell.m; sourceTree = "<group>"; };
 		EB51E6D31E5C804E007F5D9B /* YMCustomerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMCustomerModel.h; sourceTree = "<group>"; };
@@ -144,6 +148,8 @@
 		EB8F036F1E35EC350081F5EC /* YMBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMBaseModel.m; sourceTree = "<group>"; };
 		EB8F03711E35EC820081F5EC /* WaitingConfirmationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitingConfirmationModel.h; sourceTree = "<group>"; };
 		EB8F03721E35EC820081F5EC /* WaitingConfirmationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitingConfirmationModel.m; sourceTree = "<group>"; };
+		EBA7EFDD1E71B4CB00D4FF86 /* YMBaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMBaseRequest.h; sourceTree = "<group>"; };
+		EBA7EFDE1E71B4CB00D4FF86 /* YMBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMBaseRequest.m; sourceTree = "<group>"; };
 		EBABABCD1E2FB96600E94F2E /* YMBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMBaseViewController.h; sourceTree = "<group>"; };
 		EBABABCE1E2FB96600E94F2E /* YMBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMBaseViewController.m; sourceTree = "<group>"; };
 		EBABABD01E2FB9C100E94F2E /* YMCustomNaviBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMCustomNaviBarView.h; sourceTree = "<group>"; };
@@ -386,9 +392,9 @@
 		EB12F1FB1E2DFC3B0094CA3E /* YouMiBeauty */ = {
 			isa = PBXGroup;
 			children = (
+				EBA7EFDC1E71B4B400D4FF86 /* RequestApis */,
 				EBE3A5731E33454A0098B5DD /* LCTabBarController */,
 				EBABABC11E2FB55600E94F2E /* Config */,
-				EBABABC21E2FB55600E94F2E /* RequestApis */,
 				EBABABC31E2FB55600E94F2E /* Tools */,
 				EBABABC41E2FB55600E94F2E /* Vendor */,
 				EBABABC51E2FB55600E94F2E /* BaseClass */,
@@ -486,6 +492,18 @@
 			path = TopSegment;
 			sourceTree = "<group>";
 		};
+		EBA7EFDC1E71B4B400D4FF86 /* RequestApis */ = {
+			isa = PBXGroup;
+			children = (
+				EBA7EFDD1E71B4CB00D4FF86 /* YMBaseRequest.h */,
+				EBA7EFDE1E71B4CB00D4FF86 /* YMBaseRequest.m */,
+				EB1A87AE1E7983C90000F9B4 /* YMUserInfoAPI.h */,
+				EB1A87AF1E7983C90000F9B4 /* YMUserInfoAPI.m */,
+			);
+			name = RequestApis;
+			path = Config/RequestApis;
+			sourceTree = "<group>";
+		};
 		EBABABC11E2FB55600E94F2E /* Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -493,13 +511,6 @@
 				EBABABD51E2FBC8F00E94F2E /* Config.h */,
 			);
 			path = Config;
-			sourceTree = "<group>";
-		};
-		EBABABC21E2FB55600E94F2E /* RequestApis */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = RequestApis;
 			sourceTree = "<group>";
 		};
 		EBABABC31E2FB55600E94F2E /* Tools */ = {
@@ -1042,6 +1053,7 @@
 				EBE3A5811E33454A0098B5DD /* LCTabBarCONST.m in Sources */,
 				EBE3A7A81E336F250098B5DD /* DataSigner.m in Sources */,
 				EBE3A6841E3366910098B5DD /* YMReachability.m in Sources */,
+				EB1A87B01E7983C90000F9B4 /* YMUserInfoAPI.m in Sources */,
 				EBDA0A421E50BCAF00A96428 /* YMBeautyDetailViewController.m in Sources */,
 				EBDA0A451E50BD6700A96428 /* YMBeautyDetailCell.m in Sources */,
 				EB51E6DB1E5C90E7007F5D9B /* pinyin.c in Sources */,
@@ -1052,6 +1064,7 @@
 				EBE3A67E1E3366010098B5DD /* YMLoginViewController.m in Sources */,
 				EBE3A5911E33499D0098B5DD /* YMCosmetologistViewController.m in Sources */,
 				EBE3A5721E33443A0098B5DD /* YMRootViewController.m in Sources */,
+				EBA7EFDF1E71B4CB00D4FF86 /* YMBaseRequest.m in Sources */,
 				EB12F2041E2DFC3B0094CA3E /* ViewController.m in Sources */,
 				EBE3A7AE1E336F250098B5DD /* RSADataVerifier.m in Sources */,
 				EB7F0C721E3728CF00061A56 /* CALayer+LXAdd.m in Sources */,

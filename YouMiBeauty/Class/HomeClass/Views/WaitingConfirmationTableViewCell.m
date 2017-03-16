@@ -198,10 +198,10 @@
     _indexPath = index;
 }
 
-- (void)setIsSelected:(BOOL)isSelected{
-    
-    _selectButton.selected = isSelected;
-}
+//- (void)setIsSelected:(BOOL)isSelected{
+//    
+//    _selectButton.selected = isSelected;
+//}
 - (void)clickForSelected:(UIButton *)button{
     
     button.selected = !button.selected;

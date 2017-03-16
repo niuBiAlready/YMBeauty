@@ -44,7 +44,7 @@
 @property(nonatomic,strong)UILabel *statusLabel;
 
 @property(nonatomic,strong) NSIndexPath *indexPath;
-@property(nonatomic,assign) BOOL isSelected;
+//@property(nonatomic,assign) BOOL isSelected;
 @property(nonatomic,strong) WaitingConfirmationModel *model;
 @property(nonatomic,strong)void(^selectedBlock)(NSIndexPath*indexPath,BOOL isSelected,NSString *employment_userID);
 - (void)setModelForCell:(WaitingConfirmationModel *)model;

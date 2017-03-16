@@ -62,11 +62,11 @@
 }
 
 - (YTKRequestMethod)requestMethod {
-    return YTKRequestMethodGet;
+    return YTKRequestMethodPost;
 }
 
 - (YTKRequestSerializerType)requestSerializerType {
-    return YTKRequestSerializerTypeHTTP;
+    return YTKRequestSerializerTypeJSON;
 }
 
 - (NSArray *)requestAuthorizationHeaderFieldArray {

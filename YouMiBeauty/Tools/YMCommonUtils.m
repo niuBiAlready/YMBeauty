@@ -143,7 +143,7 @@
     else
     {
         
-        NSString *str = [self dictionaryToJson:dic ];
+        NSString *str = [self dictionaryToJson:dic];
         if ([str length]==0) {
             str=@"";
         }

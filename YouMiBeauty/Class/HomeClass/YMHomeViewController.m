@@ -15,6 +15,8 @@
 //套餐到期
 //详情
 #import "YMBeautyDetailViewController.h"
+
+#import "YMLoginViewController.h"
 @interface YMHomeViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 //等待确认
 @property(nonatomic,strong) UITableView         * tableView;
@@ -103,6 +105,7 @@
         weakself.isRefresh = NO;
         [weakself requestFromSever];
     }];
+    
     // Do any additional setup after loading the view.
 }
 

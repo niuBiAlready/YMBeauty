@@ -203,7 +203,7 @@
      *  请求数据
      */
     
-    NSArray *data = @[@{@"uid":@"1",@"nickname":@"阿猫",@"picurl":@"http://xiuxin-1253234316.costj.myqcloud.com/giftImages/header.png"},@{@"uid":@"2",@"nickname":@"阿狗",@"picurl":@"http://xiuxin-1253234316.costj.myqcloud.com/giftImages/header.png"}];
+    NSArray *data = @[@{@"uid":@"1",@"nickname":@"阿猫",@"picurl":@"http://p3.music.126.net/THS5HMOjmKNDDCj9G0ROyQ==/1376588561547947.jpg"},@{@"uid":@"2",@"nickname":@"阿狗",@"picurl":@"http://p3.music.126.net/THS5HMOjmKNDDCj9G0ROyQ==/1376588561547947.jpg"}];
     [self.dataSource addObjectsFromArray:[YMCustomerModel mj_objectArrayWithKeyValuesArray:data]];
     
     [self sortDatas];

@@ -42,7 +42,6 @@
         _tableView.backgroundColor = [UIColor clearColor];
 //        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-
         
     }
     return _tableView;

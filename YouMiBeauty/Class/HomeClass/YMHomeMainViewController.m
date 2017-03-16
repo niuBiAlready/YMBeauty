@@ -9,7 +9,7 @@
 #import "YMHomeMainViewController.h"
 #import "YMHomeMainCollectionViewCell.h"
 #import "YMTopBarView.h"
-
+#import "YMLoginViewController.h"
 @interface YMHomeMainViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property(nonatomic,strong) UICollectionView            *collectionView;
@@ -63,6 +63,14 @@ static NSString *const ID = @"homeMainCollectionViewCellIdentifier";
     [self.view addSubview:_topBarView];
     
 //    [self.view addSubview:_topbar];
+    NSUserDefaults *userInfo = [NSUserDefaults standardUserDefaults];
+    NSString *token = [userInfo objectForKey:@"token"];
+    if ([token integerValue] != 1) {
+        YMLoginViewController *login =[YMLoginViewController new];
+        [weakself presentViewController:login animated:NO completion:^{
+            
+        }];
+    }
     
     // Do any additional setup after loading the view.
 }

@@ -11,11 +11,11 @@
 
 #define kSecurityXiaoMiKey @"xiaomisecret"
 
-//#ifdef DEBUG
-//# define ServerURL @"http://demo.123xiaomi.com" //测试
-//#else
-//# define ServerURL @"http://api.123xiaomi.com"
-//#endif
+#ifdef DEBUG
+# define ServerURL @"http://139.224.197.68/youmi" //测试
+#else
+# define ServerURL @"http://139.224.197.68/youmi"
+#endif
 
 
 #define  KEY_USERNAME_PASSWORD @"com.company.app.usernamepassword"
@@ -32,6 +32,7 @@
 #endif
 
 
+#define YMStoringUserInfo @"YMStoringUserInfo"
 #define UIColorFromRGB(rgbValue) [UIColor \
 colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \

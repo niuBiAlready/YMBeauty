@@ -9,5 +9,5 @@
 #import "YMBaseViewController.h"
 
 @interface YMLoginViewController : YMBaseViewController
-
++(YMBaseViewController*)shareLoginViewController;
 @end
