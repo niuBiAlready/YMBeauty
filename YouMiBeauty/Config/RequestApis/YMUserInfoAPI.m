@@ -64,9 +64,6 @@
 {
     return @"/identity/sign/login.do";
 }
-- (YTKRequestMethod)requestMethod {
-    return YTKRequestMethodPost;
-}
 -(id)requestArgument
 {
     self.isUserinfo =FALSE;
@@ -75,7 +72,7 @@
     [super requestArgument];
     NSDictionary *dic = @{@"phone" :_phoneNum,
                           @"code"  :_code};
-    [self.baseDic addEntriesFromDictionary:dic];
-    return [YMCommonUtils securityMethod:self.baseDic isSecurity:NO];
+//    [self.baseDic addEntriesFromDictionary:dic];
+    return [YMCommonUtils securityMethod:dic isSecurity:NO];
 }
 @end

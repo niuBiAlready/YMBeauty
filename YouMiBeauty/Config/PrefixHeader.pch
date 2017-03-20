@@ -23,6 +23,7 @@
 #import "UIButton+EnlargeTouchArea.h"
 #import "NSString+YMSecrityUtils.h"
 #import "YMCommonUtils.h"
+#import <IQKeyboardManager.h>
 
 #import "MJExtension.h"
 #import "MJRefresh.h"
