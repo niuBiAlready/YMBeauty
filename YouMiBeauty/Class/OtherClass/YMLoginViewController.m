@@ -22,15 +22,6 @@
 
 @implementation YMLoginViewController
 
-+(YMLoginViewController*)shareLoginViewController
-{
-    static dispatch_once_t predicate;
-    static YMLoginViewController *shareLoginViewController;
-    dispatch_once(&predicate,^{
-        shareLoginViewController = [[YMLoginViewController alloc] init];
-    });
-    return shareLoginViewController;
-}
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -288,15 +279,7 @@
     if (deviceToken.length==0) {
         deviceToken =@"";
     }
-    
-//    YMHomeMainViewController *mainVC = [[YMHomeMainViewController alloc] init];
-//    YMNavigationContrller *nav = [[YMNavigationContrller alloc] initWithRootViewController:mainVC];
-//    [weakself presentViewController:nav animated:YES completion:^{
-//        [weakself.view removeFromSuperview];
-//        NSUserDefaults *userInfo = [NSUserDefaults standardUserDefaults];
-//        [userInfo setObject:@"1" forKey:@"token"];
-//        [userInfo synchronize];
-//    }];
+
     YMLoginAPI *loginRequest = [[YMLoginAPI alloc] initPhoneNum:_userNameTextField.text andCode:_passwordTextField.text];
     
     [loginRequest startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
@@ -308,8 +291,6 @@
         NSLog(@"data --- %@",request.responseJSONObject);
         if ([errorCode integerValue] == 1) {//登录成功
             
-            
-            
             [userInfo setObject:dataDic[@"token"] forKey:@"token"];
             [userInfo setObject:dataDic[@"id"] forKey:@"userid"];
             [userInfo setObject:dataDic[@"name"] forKey:@"username"];
@@ -317,14 +298,8 @@
             [userInfo synchronize];
             
             
-            //                [self dismissViewControllerAnimated:YES completion:nil];
-            YMHomeMainViewController *mainVC = [[YMHomeMainViewController alloc] init];
-            
-            YMNavigationContrller *nav = [[YMNavigationContrller alloc] initWithRootViewController:mainVC];
-            
-            [weakself presentViewController:nav animated:YES completion:^{
-                [weakself.view removeFromSuperview];
-            }];
+            [self dismissViewControllerAnimated:YES completion:nil];
+
             
         }else{
             [weakself hiddenMBHud];
