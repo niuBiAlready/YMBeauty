@@ -15,7 +15,6 @@
 		EB12F1FE1E2DFC3B0094CA3E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EB12F1FD1E2DFC3B0094CA3E /* main.m */; };
 		EB12F2011E2DFC3B0094CA3E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EB12F2001E2DFC3B0094CA3E /* AppDelegate.m */; };
 		EB12F2041E2DFC3B0094CA3E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB12F2031E2DFC3B0094CA3E /* ViewController.m */; };
-		EB12F2071E2DFC3B0094CA3E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB12F2051E2DFC3B0094CA3E /* Main.storyboard */; };
 		EB12F2091E2DFC3C0094CA3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB12F2081E2DFC3C0094CA3E /* Assets.xcassets */; };
 		EB12F20C1E2DFC3C0094CA3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB12F20A1E2DFC3C0094CA3E /* LaunchScreen.storyboard */; };
 		EB12F2171E2DFC3C0094CA3E /* YouMiBeautyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB12F2161E2DFC3C0094CA3E /* YouMiBeautyTests.m */; };
@@ -24,6 +23,7 @@
 		EB51E6D21E5C800F007F5D9B /* YMCustomerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB51E6D11E5C800F007F5D9B /* YMCustomerCell.m */; };
 		EB51E6D51E5C804E007F5D9B /* YMCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EB51E6D41E5C804E007F5D9B /* YMCustomerModel.m */; };
 		EB51E6DB1E5C90E7007F5D9B /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = EB51E6D91E5C90E7007F5D9B /* pinyin.c */; };
+		EB55CC771E82CBA40090E5C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB55CC751E82CBA40090E5C7 /* Main.storyboard */; };
 		EB7F0C721E3728CF00061A56 /* CALayer+LXAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = EB7F0C6D1E3728CF00061A56 /* CALayer+LXAdd.m */; };
 		EB7F0C731E3728CF00061A56 /* NSString+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = EB7F0C6F1E3728CF00061A56 /* NSString+Size.m */; };
 		EB7F0C741E3728CF00061A56 /* YMTopBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB7F0C711E3728CF00061A56 /* YMTopBarView.m */; };
@@ -114,7 +114,6 @@
 		EB12F2001E2DFC3B0094CA3E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		EB12F2021E2DFC3B0094CA3E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		EB12F2031E2DFC3B0094CA3E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		EB12F2061E2DFC3B0094CA3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EB12F2081E2DFC3C0094CA3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB12F20B1E2DFC3C0094CA3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EB12F20D1E2DFC3C0094CA3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -132,6 +131,7 @@
 		EB51E6D41E5C804E007F5D9B /* YMCustomerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMCustomerModel.m; sourceTree = "<group>"; };
 		EB51E6D91E5C90E7007F5D9B /* pinyin.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = pinyin.c; sourceTree = "<group>"; };
 		EB51E6DA1E5C90E7007F5D9B /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
+		EB55CC761E82CBA40090E5C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EB7F0C6C1E3728CF00061A56 /* CALayer+LXAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+LXAdd.h"; sourceTree = "<group>"; };
 		EB7F0C6D1E3728CF00061A56 /* CALayer+LXAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+LXAdd.m"; sourceTree = "<group>"; };
 		EB7F0C6E1E3728CF00061A56 /* NSString+Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Size.h"; sourceTree = "<group>"; };
@@ -406,9 +406,9 @@
 				EB12F2001E2DFC3B0094CA3E /* AppDelegate.m */,
 				EB12F2021E2DFC3B0094CA3E /* ViewController.h */,
 				EB12F2031E2DFC3B0094CA3E /* ViewController.m */,
-				EB12F2051E2DFC3B0094CA3E /* Main.storyboard */,
 				EB12F2081E2DFC3C0094CA3E /* Assets.xcassets */,
 				EB12F20A1E2DFC3C0094CA3E /* LaunchScreen.storyboard */,
+				EB55CC751E82CBA40090E5C7 /* Main.storyboard */,
 				EB12F20D1E2DFC3C0094CA3E /* Info.plist */,
 				EB12F1FC1E2DFC3B0094CA3E /* Supporting Files */,
 			);
@@ -962,13 +962,13 @@
 				EBE3A6271E3360F10098B5DD /* three@3x.jpg in Resources */,
 				EB12F20C1E2DFC3C0094CA3E /* LaunchScreen.storyboard in Resources */,
 				EBE3A6251E3360F10098B5DD /* jump@3x.png in Resources */,
+				EB55CC771E82CBA40090E5C7 /* Main.storyboard in Resources */,
 				EBE3A6221E3360F10098B5DD /* three@2x.jpg in Resources */,
 				EBE3A6261E3360F10098B5DD /* second@3x.jpg in Resources */,
 				EBE3A61F1E3360F10098B5DD /* four@2x.jpg in Resources */,
 				EB12F2091E2DFC3C0094CA3E /* Assets.xcassets in Resources */,
 				EBE3A61E1E3360F10098B5DD /* first@2x.jpg in Resources */,
 				EBE3A6231E3360F10098B5DD /* first@3x.jpg in Resources */,
-				EB12F2071E2DFC3B0094CA3E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1127,20 +1127,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		EB12F2051E2DFC3B0094CA3E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EB12F2061E2DFC3B0094CA3E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		EB12F20A1E2DFC3C0094CA3E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				EB12F20B1E2DFC3C0094CA3E /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		EB55CC751E82CBA40090E5C7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EB55CC761E82CBA40090E5C7 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1243,6 +1243,7 @@
 			baseConfigurationReference = E6041A08F36319C8854A32A5 /* Pods-YouMiBeauty.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 7953G9J3K5;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -1350,6 +1351,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kjkj.zc.YouMiBeauty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
@@ -1359,6 +1361,7 @@
 			baseConfigurationReference = BE495CA856065EAE431BD8C3 /* Pods-YouMiBeauty.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 7953G9J3K5;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -1466,6 +1469,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kjkj.zc.YouMiBeauty;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;

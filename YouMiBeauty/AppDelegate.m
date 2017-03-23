@@ -29,7 +29,7 @@
     
     [application setApplicationIconBadgeNumber:0];
     
-//    [NSThread sleepForTimeInterval:1.5];
+    [NSThread sleepForTimeInterval:1.0];
     [self setRootViewController];
     
     return YES;

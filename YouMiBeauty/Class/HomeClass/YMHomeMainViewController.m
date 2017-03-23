@@ -65,6 +65,7 @@ static NSString *const ID = @"homeMainCollectionViewCellIdentifier";
 //    [self.view addSubview:_topbar];
     NSUserDefaults *userInfo = [NSUserDefaults standardUserDefaults];
     NSString *token = [userInfo objectForKey:@"token"];
+
     if (token.length == 0) {
         
         YMLoginViewController *login =[YMLoginViewController new];

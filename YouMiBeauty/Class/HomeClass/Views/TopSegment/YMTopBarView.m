@@ -130,35 +130,35 @@
         if (btn.tag-1==_defaultIndex-1) {
             _titleBtn=btn;
             
-            CGFloat w = [self.titlesStrWidthArray[btn.tag-1] floatValue];//字的宽度
-            CGFloat line_x = (_btn_w-w)/2+(btn.tag-1)*_btn_w;
-            CGFloat nextw=0;
-            if (offsetx<(btn.tag-1)*SCREEN_WIDTH) {
-                NSLog(@"向左");
-                nextw = [self.titlesStrWidthArray[btn.tag-2] floatValue];
-                CGFloat max_w = (_btn_w*2 + w +nextw)/2;
-                CGFloat endoffsetx = (btn.tag-1)*SCREEN_WIDTH-offsetx;
-                
-                if (_selectLine.layer.width<max_w) {
-                    _selectLine.layer.width=w+MIN(endoffsetx, max_w);
-                }else{
-                    
-                    _selectLine.layer.width=max_w;
-                }
-                _selectLine.layer.right=line_x+w;
-                
-            }else{
-                NSLog(@"向右");
-                nextw = [self.titlesStrWidthArray[btn.tag] floatValue];
-                CGFloat max_w = (_btn_w*2 + w +nextw)/2;
-                CGFloat endoffsetx = offsetx - (btn.tag-1)*SCREEN_WIDTH;
-                if (_selectLine.layer.width<max_w) {
-                    _selectLine.layer.width=w+MIN(endoffsetx, max_w);
-                }else{
-                    _selectLine.layer.width=max_w;
-                }
-                
-            }
+//            CGFloat w = [self.titlesStrWidthArray[btn.tag-1] floatValue];//字的宽度
+//            CGFloat line_x = (_btn_w-w)/2+(btn.tag-1)*_btn_w;
+//            CGFloat nextw=0;
+//            if (offsetx<(btn.tag-1)*SCREEN_WIDTH) {
+//                NSLog(@"向左");
+//                nextw = [self.titlesStrWidthArray[btn.tag-2] floatValue];
+//                CGFloat max_w = (_btn_w*2 + w +nextw)/2;
+//                CGFloat endoffsetx = (btn.tag-1)*SCREEN_WIDTH-offsetx;
+//                
+//                if (_selectLine.layer.width<max_w) {
+//                    _selectLine.layer.width=w+MIN(endoffsetx, max_w);
+//                }else{
+//                    
+//                    _selectLine.layer.width=max_w;
+//                }
+//                _selectLine.layer.right=line_x+w;
+//                
+//            }else{
+//                NSLog(@"向右");
+//                nextw = [self.titlesStrWidthArray[btn.tag] floatValue];
+//                CGFloat max_w = (_btn_w*2 + w +nextw)/2;
+//                CGFloat endoffsetx = offsetx - (btn.tag-1)*SCREEN_WIDTH;
+//                if (_selectLine.layer.width<max_w) {
+//                    _selectLine.layer.width=w+MIN(endoffsetx, max_w);
+//                }else{
+//                    _selectLine.layer.width=max_w;
+//                }
+//                
+//            }
             
         }else{
             

@@ -308,8 +308,9 @@
         }
         
     } failure:^(__kindof YTKBaseRequest *request) {
-        [self hiddenMBHud];
         
+        [self hiddenMBHud];
+        [weakself showMBHud:@"请检查网络连接"];
         NSLog(@"************* --- 请求数据失败");
     }];
     
