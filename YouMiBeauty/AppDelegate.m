@@ -51,22 +51,11 @@
         
         YMNavigationContrller *nav = [[YMNavigationContrller alloc] initWithRootViewController:_rootVC];
         self.window.rootViewController =nav;
-        [self versionCheck];
         
     }
     //    [rootVC remoteNotificationjumpToVC:0];
 }
--(void)versionCheck
-{
-    //    NSString *string = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"https://itunes.apple.com/lookup?id=1091516243"] encoding:NSUTF8StringEncoding error:nil];
-    //    if (string!=nil&&string.length>0&&[string rangeOfString:@"version"].length==7) {
-    //        [self checkUpdate:string];
-    //    }
-//    NSString *urlStr = @"https://itunes.apple.com/cn/lookup?id=1091516243";
-//    NSURL *url = [NSURL URLWithString:urlStr];
-//    NSURLRequest *req = [NSURLRequest requestWithURL:url];
-//    [NSURLConnection connectionWithRequest:req delegate:self];
-}
+
 -(void)guideDoneToShowApp:(YMGuideViewController *)controller imageView:(UIImageView*)image
 {
     NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];

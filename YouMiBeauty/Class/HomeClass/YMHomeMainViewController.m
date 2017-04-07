@@ -10,6 +10,8 @@
 #import "YMHomeMainCollectionViewCell.h"
 #import "YMTopBarView.h"
 #import "YMLoginViewController.h"
+
+#import "YMHomeSelectStoreView.h"
 @interface YMHomeMainViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property(nonatomic,strong) UICollectionView            *collectionView;
@@ -17,6 +19,8 @@
 @property(nonatomic,strong) UICollectionViewFlowLayout  *collectionLayout;
 
 @property(strong,nonatomic) YMTopBarView                *topBarView;
+
+@property(strong,nonatomic) UIView                      *selectStore;//选择店铺
 
 @end
 static NSString *const ID = @"homeMainCollectionViewCellIdentifier";
@@ -63,16 +67,47 @@ static NSString *const ID = @"homeMainCollectionViewCellIdentifier";
     [self.view addSubview:_topBarView];
     
 //    [self.view addSubview:_topbar];
-    NSUserDefaults *userInfo = [NSUserDefaults standardUserDefaults];
-    NSString *token = [userInfo objectForKey:@"token"];
+    YMUserInfoData * userInfo = [[YMUserInfoMgr sharedInstance] getUserProfile];
 
-    if (token.length == 0) {
+    if (userInfo.token.length == 0) {
         
         YMLoginViewController *login =[YMLoginViewController new];
         [weakself presentViewController:login animated:NO completion:^{
             
         }];
+        return;
+    }else{
+    
+        if (userInfo.salonMapList.count > 1) {
+            
+            UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+            _selectStore = [[UIView alloc] initWithFrame:Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+            _selectStore.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+            [keyWindow addSubview:_selectStore];
+            
+            YMHomeSelectStoreView *selectView = [[YMHomeSelectStoreView alloc] initWithFrame:Rect(_selectStore.centerX-W(516)/2, _selectStore.centerY-W(440)/2, W(516), W(440))];
+            selectView.layer.masksToBounds = YES;
+            selectView.layer.cornerRadius = 15;
+            selectView.selectStoreDataArray = userInfo.salonMapList;
+            [_selectStore addSubview:selectView];
+            
+            selectView.selectStoreBlock = ^(NSInteger index) {
+                
+                userInfo.manager_id = [userInfo.salonMapList[index] objectForKey:@"manager_id"];
+                userInfo.salon_id   = [userInfo.salonMapList[index] objectForKey:@"salon_id"];
+                [[YMUserInfoMgr sharedInstance] setUserInfoData:userInfo];
+                
+                [weakself.selectStore removeFromSuperview];
+            };
+        }else{
+        
+            userInfo.manager_id = [userInfo.salonMapList[0] objectForKey:@"manager_id"];
+            userInfo.salon_id   = [userInfo.salonMapList[0] objectForKey:@"salon_id"];
+            [[YMUserInfoMgr sharedInstance] setUserInfoData:userInfo];
+        }
+        
     }
+    NSLog(@"---%@",userInfo.salonMapList);
     
     // Do any additional setup after loading the view.
 }

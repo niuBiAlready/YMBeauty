@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "YouMiBeauty/Class/HomeClass/Views/TopSegment/YMTopBarView.m"
-            timestampString = "511977952.685527"
+            filePath = "YouMiBeauty/Class/OtherClass/YMLoginViewController.m"
+            timestampString = "512579868.155459"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
-            landmarkName = "-updateselectLineFrameWithoffset:"
+            startingLineNumber = "285"
+            endingLineNumber = "285"
+            landmarkName = "-loginRequest"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -35,13 +35,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "YouMiBeauty/Class/HomeClass/Views/TopSegment/YMTopBarView.m"
-            timestampString = "511977954.474426"
+            filePath = "YouMiBeauty/Class/OtherClass/YMLoginViewController.m"
+            timestampString = "513187593.115813"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
-            landmarkName = "-updateselectLineFrameWithoffset:"
+            startingLineNumber = "299"
+            endingLineNumber = "299"
+            landmarkName = "-loginRequest"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -73,9 +73,10 @@
 //    userPhoneField.inputAccessoryView = [self toolBar];
     userPhoneField.keyboardType =UIKeyboardTypeNumberPad;
     
-    NSUserDefaults *userInfo = [NSUserDefaults standardUserDefaults];
+    YMUserInfoData * userInfo = [[YMUserInfoMgr sharedInstance] getUserProfile];
     
-    userPhoneField.text = [userInfo objectForKey:@"defaultPhone"];
+    userPhoneField.text = userInfo.phone;
+    
     [self.view addSubview:userPhoneField];
     userPhoneField.delegate =self;
     _userNameTextField = userPhoneField;
@@ -274,12 +275,9 @@
     __weak typeof(self) weakself = self;
     
     [self showSenderToServer:@"登录中..."];
-    NSUserDefaults *userInfo = [NSUserDefaults standardUserDefaults];
-    NSString *deviceToken = [userInfo objectForKey:@"deviceToken"];
-    if (deviceToken.length==0) {
-        deviceToken =@"";
-    }
 
+    YMUserInfoData * userInfo = [[YMUserInfoMgr sharedInstance] getUserProfile];
+    
     YMLoginAPI *loginRequest = [[YMLoginAPI alloc] initPhoneNum:_userNameTextField.text andCode:_passwordTextField.text];
     
     [loginRequest startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
@@ -291,11 +289,14 @@
         NSLog(@"data --- %@",request.responseJSONObject);
         if ([errorCode integerValue] == 1) {//登录成功
             
-            [userInfo setObject:dataDic[@"token"] forKey:@"token"];
-            [userInfo setObject:dataDic[@"id"] forKey:@"userid"];
-            [userInfo setObject:dataDic[@"name"] forKey:@"username"];
-            [userInfo setObject:dataDic[@"phone"] forKey:@"defaultPhone"];//默认登陆号码
-            [userInfo synchronize];
+            userInfo.token = dataDic[@"token"];
+            userInfo.phone = dataDic[@"phone"];
+            userInfo.userID= dataDic[@"id"];
+            userInfo.userName = dataDic[@"name"];
+//            userInfo.manager_id = dataDic[@"manager_id"];
+//            userInfo.salon_id   = dataDic[@"salon_id"];
+            userInfo.salonMapList = dataDic[@"salonMapList"];
+            [[YMUserInfoMgr sharedInstance] setUserInfoData:userInfo];
             
             
             [self dismissViewControllerAnimated:YES completion:nil];

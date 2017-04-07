@@ -10,7 +10,6 @@
 
 @implementation YMBaseRequest
 {
-    NSString *_userid;
     NSString *_token;
 }
 -(id)init
@@ -81,40 +80,21 @@
     //       baseDic = [NSDictionary dictionaryWithDictionary:dic];
     return dic;
 }
-//-(void)savecacheData
-//{
-//      [self saveJsonResponseToCacheFile:baseDic];
-//}
-//-(id)readCacheData
-//{
-//    return [self cacheSensitiveData];
-//}
-//-(id)cacheJson
-//{
-//
-//}
-//-(id)cacheSensitiveData
-//{
-//    return baseDic;
-//}
+
 -(id)requestArgument
 {
-    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-    
-    // app版本
-    NSString*   app_Version =  [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+//    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+//    
+//    // app版本
+//    NSString*   app_Version =  [infoDictionary objectForKey:@"CFBundleShortVersionString"];
     
     if (self.isUserinfo) {
         
-        NSUserDefaults *userInfo = [NSUserDefaults standardUserDefaults];
+        YMUserInfoData * userInfo = [[YMUserInfoMgr sharedInstance] getUserProfile];
         
-        _userid     = [userInfo objectForKey:@"userid"];
-        _token      = [userInfo objectForKey:@"token"];
+        _token      = userInfo.token;
         
-        
-        self.baseDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:  _userid,@"userid",
-                        _token,@"token",
-                        @"ios",@"tagfrom",app_Version,@"version", nil];
+        self.baseDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:_token,@"token", nil];
         
         return self.baseDic;
     }

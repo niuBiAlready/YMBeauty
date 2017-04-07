@@ -25,3 +25,9 @@
 @interface YMLoginAPI : YMBaseRequest
 - (id)initPhoneNum:(NSString*)phoneNum andCode:(NSString *)code;
 @end
+/**
+ 获取app版本号
+ */
+@interface YMSearchVersionAPI : YMBaseRequest
+- (id)initToken:(NSString*)token andManagerId:(NSString *)managerId;
+@end

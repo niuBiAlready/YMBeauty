@@ -72,7 +72,7 @@
     [super requestArgument];
     NSDictionary *dic = @{@"phone" :_phoneNum,
                           @"code"  :_code};
-//    [self.baseDic addEntriesFromDictionary:dic];
+    [self.baseDic addEntriesFromDictionary:dic];
     return [YMCommonUtils securityMethod:dic isSecurity:NO];
 }
 @end

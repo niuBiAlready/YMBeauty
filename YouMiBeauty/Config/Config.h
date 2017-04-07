@@ -161,3 +161,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 
 #endif /* Config_h */
+
+#ifndef TC_PROTECT_STR
+#define TC_PROTECT_STR(x) (x == nil ? @"": x)
+#endif
