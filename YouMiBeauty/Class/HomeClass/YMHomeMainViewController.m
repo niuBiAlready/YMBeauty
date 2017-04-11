@@ -109,9 +109,29 @@ static NSString *const ID = @"homeMainCollectionViewCellIdentifier";
     }
     NSLog(@"---%@",userInfo.salonMapList);
     
+    [self addData];
     // Do any additional setup after loading the view.
 }
+- (void)addData{
 
+    __weak typeof(self) weakself = self;
+    
+    [self showSenderToServer:@""];
+    YMGetCosmetologistAPI *getCodeAPI = [[YMGetCosmetologistAPI alloc] init];
+    
+    [getCodeAPI startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        
+        [weakself hiddenMBHud];
+        NSLog(@"data --- %@",request.responseJSONObject);
+        
+        [weakself showMBHud:request.responseJSONObject[@"msg"]];
+        
+    } failure:^(__kindof YTKBaseRequest *request) {
+        [self hiddenMBHud];
+        
+        [weakself showMBHud:@"请检查网络连接"];
+    }];
+}
 #pragma  mark scrollView delegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     

@@ -29,5 +29,23 @@
  获取app版本号
  */
 @interface YMSearchVersionAPI : YMBaseRequest
-- (id)initToken:(NSString*)token andManagerId:(NSString *)managerId;
+
+@end
+/**
+ 获取管理者相关店铺
+ */
+@interface YMGetManagerStoreAPI : YMBaseRequest
+
+@end
+/**
+ 获取美容师权限（只有美容师需要获取）
+ */
+@interface YMGetCosmetologistAPI : YMBaseRequest
+
+@end
+/**
+ 流水查询 - 等待确认
+ */
+@interface YMHomeWaitingForConfirmationAPI : YMBaseRequest
+- (id)initCustomerID:(NSString*)customerId andPage:(NSString *)page;
 @end

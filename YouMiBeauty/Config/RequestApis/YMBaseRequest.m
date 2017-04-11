@@ -11,6 +11,7 @@
 @implementation YMBaseRequest
 {
     NSString *_token;
+    NSString *_manager_id;
 }
 -(id)init
 {
@@ -93,8 +94,10 @@
         YMUserInfoData * userInfo = [[YMUserInfoMgr sharedInstance] getUserProfile];
         
         _token      = userInfo.token;
+        _manager_id = userInfo.manager_id;
         
-        self.baseDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:_token,@"token", nil];
+        
+        self.baseDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:_token,@"token",_manager_id,@"managerId", nil];
         
         return self.baseDic;
     }
