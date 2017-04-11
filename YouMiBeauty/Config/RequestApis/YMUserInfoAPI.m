@@ -166,3 +166,45 @@
     return [YMCommonUtils securityMethod:self.baseDic isSecurity:NO];
 }
 @end
+/**
+ 流水查询 - 等待确认
+ 
+ */
+@implementation YMHomeWaitingForConfirmationAPI
+{
+
+    NSString *_status;
+    NSString *_page;
+}
+-(id)initStatus:(NSString*)status andPage:(NSString *)page
+{
+    self =[super init];
+    if (self) {
+        
+        _status = status;
+        _page   = page;
+        
+    }
+    return self;
+}
+-(NSString*)requestUrl
+{
+    return @"/record/recordIndex/searchManageStreamList.do";
+}
+-(id)requestArgument
+{
+    self.isUserinfo =TRUE;
+    self.isSecurity =FALSE;
+    
+    YMUserInfoData * userInfo = [[YMUserInfoMgr sharedInstance] getUserProfile];
+    
+    [super requestArgument];
+    NSDictionary *dic = @{
+                          @"salonId" :userInfo.salon_id,
+                          @"status":_status,
+                          @"page":_page
+                          };
+    [self.baseDic addEntriesFromDictionary:dic];
+    return [YMCommonUtils securityMethod:self.baseDic isSecurity:NO];
+}
+@end

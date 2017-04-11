@@ -10,30 +10,42 @@
 
 @interface WaitingConfirmationModel : YMBaseModel
 
-/**
- *  用户id
- */
-@property(nonatomic,copy) NSString *userID;
+@property(nonatomic,copy) NSString *ref_id;
 /**
  *  头像
  */
 @property(nonatomic,copy) NSString *icon;
-/**
- *  名字
- */
+
+@property(nonatomic,copy) NSString *salon_id;
+
+@property(nonatomic,copy) NSString *insert_time;
+
+@property(nonatomic,copy) NSString *type;
+@property(nonatomic,copy) NSString *manager_id;
+@property(nonatomic,copy) NSString *customer_tip;
+@property(nonatomic,copy) NSString *expire;
 @property(nonatomic,copy) NSString *name;
-/**
- *  描述
- */
-@property(nonatomic,copy) NSString *descriptionText;
-/**
- *  状态
- */
+@property(nonatomic,copy) NSString *id;
+@property(nonatomic,copy) NSString *customer_name;
+@property(nonatomic,copy) NSString *detail;
+@property(nonatomic,copy) NSString *customer_id;
 @property(nonatomic,copy) NSString *status;
 /**
  *  日期
  */
 @property(nonatomic,copy) NSString *date;
+/**
+ *  年
+ */
+@property(nonatomic,copy) NSString *year;
+/**
+ *  月
+ */
+@property(nonatomic,copy) NSString *month;
+/**
+ *  日
+ */
+@property(nonatomic,copy) NSString *day;
 /**
  *  时间
  */

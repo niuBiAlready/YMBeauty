@@ -24,7 +24,7 @@
 
 @property(nonatomic,strong) NSMutableArray      * marksArray;
 @property(nonatomic,strong) UILabel             * textLabel;
-@property(nonatomic,assign) NSInteger             currentIndex;
+//@property(nonatomic,assign) NSInteger             currentIndex;
 
 @property(nonatomic,strong) NSMutableArray      * sectionArray;
 @property(nonatomic,strong) NSMutableArray      * dataArray;//数据源
@@ -111,7 +111,7 @@
 
 - (void)setSelectIndex:(NSInteger)selectIndex{
 
-    _currentIndex = selectIndex;
+    _selectIndex = selectIndex;
     if (selectIndex == 0) {
         
         _isRefresh = YES;
@@ -127,9 +127,29 @@
         [self requestFromSever];
     }else if (selectIndex == 1){
     
+        _isRefresh = YES;
+        
+        _pageIndex =1;
+        
+        [self.dataArray removeAllObjects];
+        
+        [self.sectionArray removeAllObjects];
+                
+        [self requestFromSever];
+        
         [self setMiddleView];
     }else if (selectIndex == 2){
     
+        _isRefresh = YES;
+        
+        _pageIndex =1;
+        
+        [self.dataArray removeAllObjects];
+        
+        [self.sectionArray removeAllObjects];
+        
+        [self requestFromSever];
+        
         [self setRightView];
     }
 }
@@ -208,13 +228,13 @@
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    if (_currentIndex == 0) {
+    if (_selectIndex == 0) {
         
         return _sectionArray.count;
-    }else if (_currentIndex == 1){
+    }else if (_selectIndex == 1){
     
         return 1;
-    }else if (_currentIndex == 2){
+    }else if (_selectIndex == 2){
     
         return 1;
     }
@@ -224,13 +244,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (_currentIndex == 0) {
+    if (_selectIndex == 0) {
         
         return [[_sectionArray[section] valueForKey:@"datalist"] count];
-    }else if (_currentIndex == 1){
+    }else if (_selectIndex == 1){
         
         return _dataArray.count;
-    }else if (_currentIndex == 2){
+    }else if (_selectIndex == 2){
         
         return _dataArray.count;
     }
@@ -254,7 +274,7 @@
     cell.indexPath = indexPath;
     
     WaitingConfirmationModel *model = [WaitingConfirmationModel new];
-    if (_currentIndex == 0) {
+    if (_selectIndex == 0) {
         
         model = [[_dataArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
         
@@ -277,11 +297,11 @@
         };
         
         [cell setModelForCell:model];
-    }else if (_currentIndex == 1){
+    }else if (_selectIndex == 1){
     
         model = _dataArray[indexPath.row];
         [cell setModelForCellNoBtn:model];
-    }else if (_currentIndex == 2){
+    }else if (_selectIndex == 2){
     
         model = _dataArray[indexPath.row];
         [cell setModelForCellNoBtn:model];
@@ -295,15 +315,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSLog(@"%ld",_currentIndex);
-    if (_currentIndex == 0) {
+    NSLog(@"%ld",_selectIndex);
+    if (_selectIndex == 0) {
         
         YMBeautyDetailViewController *detaiVC = [YMBeautyDetailViewController new];
         [self.navigationController pushViewController:detaiVC animated:YES];
-    }else if (_currentIndex == 1){
+    }else if (_selectIndex == 1){
         
 
-    }else if (_currentIndex == 2){
+    }else if (_selectIndex == 2){
         
 
     }
@@ -311,7 +331,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    if (_currentIndex == 0) {
+    if (_selectIndex == 0) {
         
         return 35.0;
     }
@@ -320,20 +340,18 @@
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    WaitingConfirmationModel *model = [WaitingConfirmationModel new];
-    model = [_sectionArray objectAtIndex:section];
-    
-    UIView *headerView = [[UIView alloc] initWithFrame:Rect(0, 0, SCREEN_WIDTH, 35)];
-    headerView.backgroundColor = UIColorFromRGB(0xf0f0f0);
-    
-    UILabel *title = [[UILabel alloc] initWithFrame:Rect(10, 0, SCREEN_WIDTH-20, 35)];
-    title.font = UIBaseFont(12);
-    title.textColor = UIColorFromRGB(0x545454);
-    title.text = model.groupTime;
-    [headerView addSubview:title];
-    
-    if (_currentIndex == 0) {
+    if (_selectIndex == 0) {
+        WaitingConfirmationModel *model = [WaitingConfirmationModel new];
+        model = [_sectionArray objectAtIndex:section];
         
+        UIView *headerView = [[UIView alloc] initWithFrame:Rect(0, 0, SCREEN_WIDTH, 35)];
+        headerView.backgroundColor = UIColorFromRGB(0xf0f0f0);
+        
+        UILabel *title = [[UILabel alloc] initWithFrame:Rect(10, 0, SCREEN_WIDTH-20, 35)];
+        title.font = UIBaseFont(12);
+        title.textColor = UIColorFromRGB(0x545454);
+        title.text = model.groupTime;
+        [headerView addSubview:title];
         return headerView;
     }
     return nil;
@@ -512,10 +530,6 @@
 
 /**
  *  判断一个月有多少天
- *
- *  @param date 日期
- *
- *  @return
  */
 
 - (NSInteger)NSStringIntTeger:(NSInteger)teger andYear:(NSInteger)year
@@ -627,112 +641,314 @@
     
     [self requestFromSever];
 }
+- (NSString *)timeWithTimeIntervalString:(NSString *)timeString
+{
+    // 格式化时间
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+//    formatter.timeZone = [NSTimeZone timeZoneWithName:@"shanghai"];
+    formatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT+0800"];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:@"yyyy年MM月dd日 HH:mm"];
+    
+    // 毫秒值转化为秒
+    NSDate* date = [NSDate dateWithTimeIntervalSince1970:[timeString doubleValue]/ 1000.0];
+    NSString* dateString = [formatter stringFromDate:date];
+    return dateString;
+}
+- (void)changeTime:(NSString *)timeString result:(void(^)(NSString*date,NSString *year,NSString *month,NSString*day,NSString*time))result{
 
+    // 格式化时间
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+//    formatter.timeZone = [NSTimeZone timeZoneWithName:@"shanghai"];
+    formatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT+0800"];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    
+    // 毫秒值转化为秒
+    NSDate* date = [NSDate dateWithTimeIntervalSince1970:[timeString doubleValue]/ 1000.0];
+    //年月日
+    [formatter setDateFormat:@"yyyy年MM月"];
+    NSString* dateString = [formatter stringFromDate:date];
+    //年
+    [formatter setDateFormat:@"yyyy"];
+    NSString* dateStringYear = [formatter stringFromDate:date];
+    //月
+    [formatter setDateFormat:@"MM"];
+    NSString* dateStringMonth = [formatter stringFromDate:date];
+    //日
+    [formatter setDateFormat:@"dd"];
+    NSString* dateStringDay = [formatter stringFromDate:date];
+    //时间
+    [formatter setDateFormat:@"HH:mm"];
+    NSString* dateStringtime = [formatter stringFromDate:date];
+    
+    result(dateString,dateStringYear,dateStringMonth,dateStringDay,dateStringtime);
+}
 - (void)requestFromSever{
 
-    NSMutableArray *dataArray = [NSMutableArray arrayWithObjects:@{@"userID":@"1",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"2",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"3",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"4",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"5",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"6",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"十月"},@{@"userID":@"7",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"8",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"9",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"九月"},@{@"userID":@"10",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"11",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"十月"},@{@"userID":@"12",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"13",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"14",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"15",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"九月"}, nil];
+    __weak typeof(self) weakself = self;
     
+    [self showSenderToServer:@""];
+    YMHomeWaitingForConfirmationAPI *waitingForConfirmation = [[YMHomeWaitingForConfirmationAPI alloc] initStatus:@"0" andPage:@"1"];
     
-    if (_currentIndex == 0) {
+    [waitingForConfirmation startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
         
-        __weak typeof(self) weakself = self;
+        [weakself hiddenMBHud];
+//        NSLog(@"data --- %@",request.responseJSONObject);
+        NSArray * tempArr = [request.responseJSONObject objectForKey:@"data"];
         
-        NSArray *pbaseArr = dataArray;
+        NSMutableArray *dataArray = [NSMutableArray array];
         
-        NSMutableArray *addTempArray = [NSMutableArray array];
-        if (weakself.isRefresh) {
+        for (int i = 0; i<tempArr.count; i ++) {
             
-            addTempArray = dataArray;
-            [weakself.addArray removeAllObjects];
-            [weakself.addArray addObjectsFromArray:pbaseArr];
-        }else{
+            NSDictionary *tempDic = tempArr[i];
+            NSMutableDictionary *tempDictionary = [NSMutableDictionary dictionary];
             
-            [weakself.marksArray removeAllObjects];
-            [weakself.addArray addObjectsFromArray:pbaseArr];
-            [addTempArray addObjectsFromArray:weakself.addArray];
-        }
-        
-        NSMutableArray *dataArr = [NSMutableArray array];
-        
-        for (int j = 0; j < addTempArray.count; j++) {
+            [tempDictionary setObject:tempDic[@"ref_id"] forKey:@"ref_id"];
+            [tempDictionary setObject:tempDic[@"salon_id"] forKey:@"salon_id"];
+            [tempDictionary setObject:tempDic[@"insert_time"] forKey:@"insert_time"];
+            [tempDictionary setObject:tempDic[@"type"] forKey:@"type"];
+            [tempDictionary setObject:tempDic[@"manager_id"] forKey:@"manager_id"];
+            [tempDictionary setObject:tempDic[@"customer_tip"] forKey:@"customer_tip"];
+            [tempDictionary setObject:tempDic[@"expire"] forKey:@"expire"];
+            [tempDictionary setObject:tempDic[@"name"] forKey:@"name"];
+            [tempDictionary setObject:tempDic[@"id"] forKey:@"id"];
+            [tempDictionary setObject:tempDic[@"customer_name"] forKey:@"customer_name"];
+            [tempDictionary setObject:tempDic[@"detail"] forKey:@"detail"];
+            [tempDictionary setObject:tempDic[@"customer_id"] forKey:@"customer_id"];
+            [tempDictionary setObject:tempDic[@"status"] forKey:@"status"];
             
-            NSString *title = [addTempArray[j] objectForKey:@"groupTime"];
+            NSString *timeString = [tempArr[i] objectForKey:@"insert_time"];
             
-            NSMutableArray *datalist = [@[] mutableCopy];
-            
-            NSMutableDictionary *dataDic = [@{} mutableCopy];
-            
-            [datalist addObject:addTempArray[j]];
-            
-            for (int k = j+1; k < addTempArray.count; k ++) {
+            [weakself changeTime:timeString result:^(NSString*date, NSString *year, NSString *month, NSString *day, NSString*time) {
                 
-                if ([title isEqualToString:[addTempArray[k] objectForKey:@"groupTime"]]) {
+                NSLog(@"date - %@,time === %@ - %@ - %@ - %@",date,year,month,day,time);
+                [tempDictionary setObject:date forKey:@"groupTime"];
+                [tempDictionary setObject:date forKey:@"date"];
+                [tempDictionary setObject:year forKey:@"year"];
+                [tempDictionary setObject:month forKey:@"month"];
+                [tempDictionary setObject:day forKey:@"day"];
+                [tempDictionary setObject:time forKey:@"time"];
+                
+            }];
+            
+            [dataArray addObject:tempDictionary];
+            
+        }
+        [weakself showMBHud:request.responseJSONObject[@"msg"]];
+        
+        if (_selectIndex == 0) {
+            
+            __weak typeof(self) weakself = self;
+            
+            NSArray *pbaseArr = dataArray;
+            
+            NSMutableArray *addTempArray = [NSMutableArray array];
+            if (weakself.isRefresh) {
+                
+                addTempArray = dataArray;
+                [weakself.addArray removeAllObjects];
+                [weakself.addArray addObjectsFromArray:pbaseArr];
+            }else{
+                
+                [weakself.marksArray removeAllObjects];
+                [weakself.addArray addObjectsFromArray:pbaseArr];
+                [addTempArray addObjectsFromArray:weakself.addArray];
+            }
+            
+            NSMutableArray *dataArr = [NSMutableArray array];
+            
+            for (int j = 0; j < addTempArray.count; j++) {
+                
+                NSString *title = [addTempArray[j] objectForKey:@"groupTime"];
+                
+                NSMutableArray *datalist = [@[] mutableCopy];
+                
+                NSMutableDictionary *dataDic = [@{} mutableCopy];
+                
+                [datalist addObject:addTempArray[j]];
+                
+                for (int k = j+1; k < addTempArray.count; k ++) {
                     
-                    [datalist addObject:addTempArray[k]];
+                    if ([title isEqualToString:[addTempArray[k] objectForKey:@"groupTime"]]) {
+                        
+                        [datalist addObject:addTempArray[k]];
+                        
+                        [addTempArray removeObjectAtIndex:k];
+                        
+                        k = k-1;
+                    }
                     
-                    [addTempArray removeObjectAtIndex:k];
-                    
-                    k = k-1;
                 }
                 
-            }
-            
-            [dataDic setObject:title forKey:@"groupTime"];
-            [dataDic setObject:datalist forKey:@"datalist"];
-            [dataArr addObject:dataDic];
-            
-        }
-        
-        [weakself.sectionArray removeAllObjects];
-        [weakself.dataArray removeAllObjects];
-        
-        if (weakself.isRefresh) {
-            
-            [weakself.tableView.mj_header endRefreshing];
-        }else{
-            
-            
-            if ([(NSArray *)dataArray count] == 0) {
+                [dataDic setObject:title forKey:@"groupTime"];
+                [dataDic setObject:datalist forKey:@"datalist"];
+                [dataArr addObject:dataDic];
                 
-                [weakself showMBHud:@"暂无更多数据！"];
             }
-            [weakself.tableView.mj_footer endRefreshing];
-        }
-        
-        [weakself.sectionArray addObjectsFromArray:[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:dataArr]];
-        
-        NSArray *tempArray = [[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:dataArr] valueForKey:@"datalist"];
-        
-        [weakself.dataArray addObjectsFromArray:[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:tempArray]];
-        
-        if (weakself.dataArray.count == 0) {
             
-            //        weakself.noConnectionView = [[LQNoInternetConnection alloc]initWithFrame:Rect(0, ViewBavBarH+45, SCREEN_WIDTH, SCREEN_HEIGHT) andType:NO];
-            //
-            //        [weakself.view addSubview:weakself.noConnectionView];
+            [weakself.sectionArray removeAllObjects];
+            [weakself.dataArray removeAllObjects];
+            
+            if (weakself.isRefresh) {
+                
+                [weakself.tableView.mj_header endRefreshing];
+            }else{
+                
+                
+                if ([(NSArray *)dataArray count] == 0) {
+                    
+                    [weakself showMBHud:@"暂无更多数据！"];
+                }
+                [weakself.tableView.mj_footer endRefreshing];
+            }
+            
+            [weakself.sectionArray addObjectsFromArray:[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:dataArr]];
+            
+            NSArray *tempArray = [[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:dataArr] valueForKey:@"datalist"];
+            
+            [weakself.dataArray addObjectsFromArray:[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:tempArray]];
+            
+            if (weakself.dataArray.count == 0) {
+                
+                //        weakself.noConnectionView = [[LQNoInternetConnection alloc]initWithFrame:Rect(0, ViewBavBarH+45, SCREEN_WIDTH, SCREEN_HEIGHT) andType:NO];
+                //
+                //        [weakself.view addSubview:weakself.noConnectionView];
+            }
+            [weakself.tableView reloadData];
+        }else if (_selectIndex == 1){
+            
+            if (self.isRefresh) {
+                
+                [self.tableView.mj_header endRefreshing];
+            }else{
+                
+                [self.tableView.mj_footer endRefreshing];
+            }
+            [self.dataArray addObjectsFromArray:[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:dataArray]];
+        }else if (_selectIndex == 2){
+            
+            [self.dataArray addObjectsFromArray:[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:dataArray]];
+            if (self.isRefresh) {
+                
+                [self.tableView.mj_header endRefreshing];
+            }else{
+                
+                [self.tableView.mj_footer endRefreshing];
+            }
         }
-        [weakself.tableView reloadData];
-    }else if (_currentIndex == 1){
+        
+    } failure:^(__kindof YTKBaseRequest *request) {
+        [self hiddenMBHud];
+        
+        [weakself showMBHud:@"请检查网络连接"];
+    }];
     
-        if (self.isRefresh) {
-            
-            [self.tableView.mj_header endRefreshing];
-        }else{
-            
-            [self.tableView.mj_footer endRefreshing];
-        }
-        [self.dataArray addObjectsFromArray:[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:dataArray]];
-    }else if (_currentIndex == 2){
+//    NSMutableArray *dataArray = [NSMutableArray arrayWithObjects:@{@"userID":@"1",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"2",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"3",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"4",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"5",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"6",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"十月"},@{@"userID":@"7",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"8",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"9",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"九月"},@{@"userID":@"10",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"11",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"十月"},@{@"userID":@"12",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"13",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"14",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"15",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"九月"}, nil];
     
-        [self.dataArray addObjectsFromArray:[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:dataArray]];
-        if (self.isRefresh) {
-            
-            [self.tableView.mj_header endRefreshing];
-        }else{
-            
-            [self.tableView.mj_footer endRefreshing];
-        }
-    }
+    
+//    if (_currentIndex == 0) {
+//        
+//        __weak typeof(self) weakself = self;
+//        
+//        NSArray *pbaseArr = dataArray;
+//        
+//        NSMutableArray *addTempArray = [NSMutableArray array];
+//        if (weakself.isRefresh) {
+//            
+//            addTempArray = dataArray;
+//            [weakself.addArray removeAllObjects];
+//            [weakself.addArray addObjectsFromArray:pbaseArr];
+//        }else{
+//            
+//            [weakself.marksArray removeAllObjects];
+//            [weakself.addArray addObjectsFromArray:pbaseArr];
+//            [addTempArray addObjectsFromArray:weakself.addArray];
+//        }
+//        
+//        NSMutableArray *dataArr = [NSMutableArray array];
+//        
+//        for (int j = 0; j < addTempArray.count; j++) {
+//            
+//            NSString *title = [addTempArray[j] objectForKey:@"groupTime"];
+//            
+//            NSMutableArray *datalist = [@[] mutableCopy];
+//            
+//            NSMutableDictionary *dataDic = [@{} mutableCopy];
+//            
+//            [datalist addObject:addTempArray[j]];
+//            
+//            for (int k = j+1; k < addTempArray.count; k ++) {
+//                
+//                if ([title isEqualToString:[addTempArray[k] objectForKey:@"groupTime"]]) {
+//                    
+//                    [datalist addObject:addTempArray[k]];
+//                    
+//                    [addTempArray removeObjectAtIndex:k];
+//                    
+//                    k = k-1;
+//                }
+//                
+//            }
+//            
+//            [dataDic setObject:title forKey:@"groupTime"];
+//            [dataDic setObject:datalist forKey:@"datalist"];
+//            [dataArr addObject:dataDic];
+//            
+//        }
+//        
+//        [weakself.sectionArray removeAllObjects];
+//        [weakself.dataArray removeAllObjects];
+//        
+//        if (weakself.isRefresh) {
+//            
+//            [weakself.tableView.mj_header endRefreshing];
+//        }else{
+//            
+//            
+//            if ([(NSArray *)dataArray count] == 0) {
+//                
+//                [weakself showMBHud:@"暂无更多数据！"];
+//            }
+//            [weakself.tableView.mj_footer endRefreshing];
+//        }
+//        
+//        [weakself.sectionArray addObjectsFromArray:[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:dataArr]];
+//        
+//        NSArray *tempArray = [[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:dataArr] valueForKey:@"datalist"];
+//        
+//        [weakself.dataArray addObjectsFromArray:[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:tempArray]];
+//        
+//        if (weakself.dataArray.count == 0) {
+//            
+//            //        weakself.noConnectionView = [[LQNoInternetConnection alloc]initWithFrame:Rect(0, ViewBavBarH+45, SCREEN_WIDTH, SCREEN_HEIGHT) andType:NO];
+//            //
+//            //        [weakself.view addSubview:weakself.noConnectionView];
+//        }
+//        [weakself.tableView reloadData];
+//    }else if (_currentIndex == 1){
+//    
+//        if (self.isRefresh) {
+//            
+//            [self.tableView.mj_header endRefreshing];
+//        }else{
+//            
+//            [self.tableView.mj_footer endRefreshing];
+//        }
+//        [self.dataArray addObjectsFromArray:[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:dataArray]];
+//    }else if (_currentIndex == 2){
+//    
+//        [self.dataArray addObjectsFromArray:[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:dataArray]];
+//        if (self.isRefresh) {
+//            
+//            [self.tableView.mj_header endRefreshing];
+//        }else{
+//            
+//            [self.tableView.mj_footer endRefreshing];
+//        }
+//    }
     
 }
 - (void)didReceiveMemoryWarning {

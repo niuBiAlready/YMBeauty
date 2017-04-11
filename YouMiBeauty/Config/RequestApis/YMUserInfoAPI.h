@@ -47,5 +47,5 @@
  流水查询 - 等待确认
  */
 @interface YMHomeWaitingForConfirmationAPI : YMBaseRequest
-- (id)initCustomerID:(NSString*)customerId andPage:(NSString *)page;
+- (id)initStatus:(NSString*)status andPage:(NSString *)page;
 @end

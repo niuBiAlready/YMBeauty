@@ -16,7 +16,7 @@
     _model = model;
     _selectButton.selected = model.isSelected;
     _nameLabel.text = model.name;
-    _descriptionLabel.text = model.descriptionText;
+    _descriptionLabel.text = model.detail;
     _dateLabel.text = model.date;
     _timeLabel.text = model.time;
     _statusLabel.text = model.status;
@@ -25,7 +25,7 @@
 -(void)setModelForCellNoBtn:(WaitingConfirmationModel *)model{
 
     _nameLabel.text = model.name;
-    _descriptionLabel.text = model.descriptionText;
+    _descriptionLabel.text = model.detail;
     _dateLabel.text = model.date;
     _timeLabel.text = model.time;
     _statusLabel.text = model.status;
@@ -206,7 +206,7 @@
     
     button.selected = !button.selected;
     if (_selectedBlock && _indexPath) {
-        _selectedBlock(_indexPath,button.isSelected,_model.userID);
+        _selectedBlock(_indexPath,button.isSelected,_model.id);
     }
 }
 - (void)awakeFromNib {
