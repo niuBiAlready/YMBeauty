@@ -17,6 +17,7 @@
     }
     return self;
 }
+
 + (instancetype)initWithKVCDictionary:(NSDictionary *)KVCDic{
     
     return [[[self class] alloc] initWithDictionary:KVCDic];
