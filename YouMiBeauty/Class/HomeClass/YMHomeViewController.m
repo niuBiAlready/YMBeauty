@@ -24,7 +24,6 @@
 
 @property(nonatomic,strong) NSMutableArray      * marksArray;
 @property(nonatomic,strong) UILabel             * textLabel;
-//@property(nonatomic,assign) NSInteger             currentIndex;
 
 @property(nonatomic,strong) NSMutableArray      * sectionArray;
 @property(nonatomic,strong) NSMutableArray      * dataArray;//数据源
@@ -84,6 +83,8 @@
     [super viewDidLoad];
     [self.viewNaviBar setAlpha:0];
 
+    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
+    
     _pageIndex =1;
     _isRefresh = YES;
     self.view.backgroundColor = [UIColor whiteColor];
@@ -112,6 +113,8 @@
 - (void)setSelectIndex:(NSInteger)selectIndex{
 
     _selectIndex = selectIndex;
+    [_searchText resignFirstResponder];
+    NSLog(@"selectIndex --- %ld",selectIndex);
     if (selectIndex == 0) {
         
         _isRefresh = YES;
@@ -134,10 +137,12 @@
         [self.dataArray removeAllObjects];
         
         [self.sectionArray removeAllObjects];
-                
-        [self requestFromSever];
         
         [self setMiddleView];
+        
+        [self requestFromSever];
+        
+        
     }else if (selectIndex == 2){
     
         _isRefresh = YES;
@@ -166,7 +171,6 @@
         _searchText.borderStyle = UITextBorderStyleRoundedRect;
         _searchText.clearButtonMode = UITextFieldViewModeAlways;
         _searchText.clearsOnBeginEditing = YES;
-        _searchText.inputAccessoryView = [self toolBar];
         _searchText.backgroundColor = UIColorFromRGB(0xf2f2f2);
 
         UIImage *phoneNumImage = [UIImage imageNamed:@"icon_homesearch"];
@@ -233,10 +237,12 @@
         return _sectionArray.count;
     }else if (_selectIndex == 1){
     
-        return 1;
+//        return 1;
+        return _sectionArray.count;
     }else if (_selectIndex == 2){
     
-        return 1;
+//        return 1;
+        return _sectionArray.count;
     }
     return 0;
     
@@ -249,10 +255,12 @@
         return [[_sectionArray[section] valueForKey:@"datalist"] count];
     }else if (_selectIndex == 1){
         
-        return _dataArray.count;
+//        return _dataArray.count;
+        return [[_sectionArray[section] valueForKey:@"datalist"] count];
     }else if (_selectIndex == 2){
         
-        return _dataArray.count;
+//        return _dataArray.count;
+        return [[_sectionArray[section] valueForKey:@"datalist"] count];
     }
     return 0;
 }
@@ -299,11 +307,13 @@
         [cell setModelForCell:model];
     }else if (_selectIndex == 1){
     
-        model = _dataArray[indexPath.row];
+//        model = _dataArray[indexPath.row];
+        model = [[_dataArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
         [cell setModelForCellNoBtn:model];
     }else if (_selectIndex == 2){
     
-        model = _dataArray[indexPath.row];
+//        model = _dataArray[indexPath.row];
+        model = [[_dataArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
         [cell setModelForCellNoBtn:model];
     }
     
@@ -361,24 +371,6 @@
     return 0.001f;
 }
 
--(void)resignFirstResponserToolbar
-{
-    [_searchText resignFirstResponder];
-}
--(UIToolbar *)toolBar
-{
-    UIToolbar * toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
-    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setTitle:@"完成" forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    button.titleLabel.font = UIBaseFont(14);
-    [button setFrame:CGRectMake(SCREEN_WIDTH-50, 7, 50, 30)];
-    button.backgroundColor = toolBar.backgroundColor;
-    [button addTarget:self action:@selector(resignFirstResponserToolbar) forControlEvents:UIControlEventTouchUpInside];
-    [toolBar addSubview:button];
-    
-    return toolBar;
-}
 #pragma Mark --- 流水明细View
 //流水明细
 - (void)setMiddleView{
@@ -424,7 +416,6 @@
     
     [self.dataArray removeAllObjects];
     
-    [self requestFromSever];
 }
 - (void)ClickToDo:(UIButton *)sender{
 
@@ -627,6 +618,7 @@
 - (void)getYearMonthDay{
 
     NSLog(@"date --- %ld-%ld-%ld",_yearNum,_monthNum,_dayNum);
+    [self requestFromSever];
 }
 #pragma Mark --- 套餐到期View
 //套餐到期
@@ -688,60 +680,69 @@
 }
 - (void)requestFromSever{
 
+    
+    if (_isRefresh) {
+        
+        _pageIndex = 1;
+    }else{
+    
+        _pageIndex ++;
+    }
     __weak typeof(self) weakself = self;
     
-    [self showSenderToServer:@""];
-    YMHomeWaitingForConfirmationAPI *waitingForConfirmation = [[YMHomeWaitingForConfirmationAPI alloc] initStatus:@"0" andPage:@"1"];
+//    [self showSenderToServer:@""];
+
     
-    [waitingForConfirmation startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+    if (_selectIndex == 0) {
         
-        [weakself hiddenMBHud];
-//        NSLog(@"data --- %@",request.responseJSONObject);
-        NSArray * tempArr = [request.responseJSONObject objectForKey:@"data"];
+        YMHomeWaitingForConfirmationAPI *waitingForConfirmation = [[YMHomeWaitingForConfirmationAPI alloc] initStatus:@"1" andPage:_pageIndex];
         
-        NSMutableArray *dataArray = [NSMutableArray array];
-        
-        for (int i = 0; i<tempArr.count; i ++) {
+        [waitingForConfirmation startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
             
-            NSDictionary *tempDic = tempArr[i];
-            NSMutableDictionary *tempDictionary = [NSMutableDictionary dictionary];
+            [weakself hiddenMBHud];
+            [weakself.noConnectionView hiddenNoConnectionView];
+            //        NSLog(@"data --- %@",request.responseJSONObject);
+            NSArray * tempArr = [request.responseJSONObject objectForKey:@"data"];
             
-            [tempDictionary setObject:tempDic[@"ref_id"] forKey:@"ref_id"];
-            [tempDictionary setObject:tempDic[@"salon_id"] forKey:@"salon_id"];
-            [tempDictionary setObject:tempDic[@"insert_time"] forKey:@"insert_time"];
-            [tempDictionary setObject:tempDic[@"type"] forKey:@"type"];
-            [tempDictionary setObject:tempDic[@"manager_id"] forKey:@"manager_id"];
-            [tempDictionary setObject:tempDic[@"customer_tip"] forKey:@"customer_tip"];
-            [tempDictionary setObject:tempDic[@"expire"] forKey:@"expire"];
-            [tempDictionary setObject:tempDic[@"name"] forKey:@"name"];
-            [tempDictionary setObject:tempDic[@"id"] forKey:@"id"];
-            [tempDictionary setObject:tempDic[@"customer_name"] forKey:@"customer_name"];
-            [tempDictionary setObject:tempDic[@"detail"] forKey:@"detail"];
-            [tempDictionary setObject:tempDic[@"customer_id"] forKey:@"customer_id"];
-            [tempDictionary setObject:tempDic[@"status"] forKey:@"status"];
+            NSMutableArray *dataArray = [NSMutableArray array];
             
-            NSString *timeString = [tempArr[i] objectForKey:@"insert_time"];
-            
-            [weakself changeTime:timeString result:^(NSString*date, NSString *year, NSString *month, NSString *day, NSString*time) {
+            for (int i = 0; i<tempArr.count; i ++) {
                 
-                NSLog(@"date - %@,time === %@ - %@ - %@ - %@",date,year,month,day,time);
-                [tempDictionary setObject:date forKey:@"groupTime"];
-                [tempDictionary setObject:date forKey:@"date"];
-                [tempDictionary setObject:year forKey:@"year"];
-                [tempDictionary setObject:month forKey:@"month"];
-                [tempDictionary setObject:day forKey:@"day"];
-                [tempDictionary setObject:time forKey:@"time"];
+                NSDictionary *tempDic = tempArr[i];
+                NSMutableDictionary *tempDictionary = [NSMutableDictionary dictionary];
                 
-            }];
-            
-            [dataArray addObject:tempDictionary];
-            
-        }
-        [weakself showMBHud:request.responseJSONObject[@"msg"]];
-        
-        if (_selectIndex == 0) {
-            
-            __weak typeof(self) weakself = self;
+                [tempDictionary setObject:tempDic[@"ref_id"] forKey:@"ref_id"];
+                [tempDictionary setObject:tempDic[@"salon_id"] forKey:@"salon_id"];
+                [tempDictionary setObject:tempDic[@"insert_time"] forKey:@"insert_time"];
+                [tempDictionary setObject:tempDic[@"type"] forKey:@"type"];
+                [tempDictionary setObject:tempDic[@"manager_id"] forKey:@"manager_id"];
+                [tempDictionary setObject:tempDic[@"customer_tip"] forKey:@"customer_tip"];
+                [tempDictionary setObject:tempDic[@"expire"] forKey:@"expire"];
+                [tempDictionary setObject:tempDic[@"name"] forKey:@"name"];
+                [tempDictionary setObject:tempDic[@"id"] forKey:@"id"];
+                [tempDictionary setObject:tempDic[@"customer_name"] forKey:@"customer_name"];
+                [tempDictionary setObject:tempDic[@"detail"] forKey:@"detail"];
+                [tempDictionary setObject:tempDic[@"customer_id"] forKey:@"customer_id"];
+                [tempDictionary setObject:tempDic[@"status"] forKey:@"status"];
+                
+                NSString *timeString = [tempArr[i] objectForKey:@"insert_time"];
+                
+                [weakself changeTime:timeString result:^(NSString*date, NSString *year, NSString *month, NSString *day, NSString*time) {
+                    
+                    //                NSLog(@"date - %@,time === %@ - %@ - %@ - %@",date,year,month,day,time);
+                    [tempDictionary setObject:date forKey:@"groupTime"];
+                    [tempDictionary setObject:date forKey:@"date"];
+                    [tempDictionary setObject:year forKey:@"year"];
+                    [tempDictionary setObject:month forKey:@"month"];
+                    [tempDictionary setObject:day forKey:@"day"];
+                    [tempDictionary setObject:time forKey:@"time"];
+                    
+                }];
+                
+                [dataArray addObject:tempDictionary];
+                
+            }
+            [weakself showMBHud:request.responseJSONObject[@"msg"]];
             
             NSArray *pbaseArr = dataArray;
             
@@ -813,38 +814,310 @@
             
             if (weakself.dataArray.count == 0) {
                 
-                //        weakself.noConnectionView = [[LQNoInternetConnection alloc]initWithFrame:Rect(0, ViewBavBarH+45, SCREEN_WIDTH, SCREEN_HEIGHT) andType:NO];
-                //
-                //        [weakself.view addSubview:weakself.noConnectionView];
+                weakself.noConnectionView = [[YMNoInternetConnection alloc]initWithFrame:Rect(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT) andType:NO];
+                
+                [weakself.view addSubview:weakself.noConnectionView];
             }
             [weakself.tableView reloadData];
-        }else if (_selectIndex == 1){
             
-            if (self.isRefresh) {
+            
+        } failure:^(__kindof YTKBaseRequest *request) {
+            [weakself hiddenMBHud];
+            [weakself showMBHud:@"请检查网络连接"];
+            
+            weakself.noConnectionView = [[YMNoInternetConnection alloc]initWithFrame:Rect(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT)];
+            [weakself.view addSubview:weakself.noConnectionView];
+            [weakself.view bringSubviewToFront:weakself.noConnectionView];
+            weakself.noConnectionView.clickBlock = ^(){
                 
-                [self.tableView.mj_header endRefreshing];
+                [weakself requestFromSever];
+                
+            };
+        }];
+
+    }else if (_selectIndex == 1){//流水
+        
+        YMHomeMoneyDetailAPI *moneyDetail = [[YMHomeMoneyDetailAPI alloc] initStatus:@"0" andYear:_yearNum andMonth:_monthNum andDay:_dayNum andPage:_pageIndex];
+        
+        [moneyDetail startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+            
+            [weakself hiddenMBHud];
+            [weakself.noConnectionView hiddenNoConnectionView];
+            //        NSLog(@"data --- %@",request.responseJSONObject);
+            NSArray * tempArr = [request.responseJSONObject objectForKey:@"data"];
+            
+            NSMutableArray *dataArray = [NSMutableArray array];
+            
+            for (int i = 0; i<tempArr.count; i ++) {
+                
+                NSDictionary *tempDic = tempArr[i];
+                NSMutableDictionary *tempDictionary = [NSMutableDictionary dictionary];
+                
+                [tempDictionary setObject:tempDic[@"ref_id"] forKey:@"ref_id"];
+                [tempDictionary setObject:tempDic[@"salon_id"] forKey:@"salon_id"];
+                [tempDictionary setObject:tempDic[@"insert_time"] forKey:@"insert_time"];
+                [tempDictionary setObject:tempDic[@"type"] forKey:@"type"];
+                [tempDictionary setObject:tempDic[@"manager_id"] forKey:@"manager_id"];
+                [tempDictionary setObject:tempDic[@"customer_tip"] forKey:@"customer_tip"];
+                [tempDictionary setObject:tempDic[@"expire"] forKey:@"expire"];
+                [tempDictionary setObject:tempDic[@"name"] forKey:@"name"];
+                [tempDictionary setObject:tempDic[@"id"] forKey:@"id"];
+                [tempDictionary setObject:tempDic[@"customer_name"] forKey:@"customer_name"];
+                [tempDictionary setObject:tempDic[@"detail"] forKey:@"detail"];
+                [tempDictionary setObject:tempDic[@"customer_id"] forKey:@"customer_id"];
+                [tempDictionary setObject:tempDic[@"status"] forKey:@"status"];
+                
+                NSString *timeString = [tempArr[i] objectForKey:@"insert_time"];
+                
+                [weakself changeTime:timeString result:^(NSString*date, NSString *year, NSString *month, NSString *day, NSString*time) {
+                    
+                    //                NSLog(@"date - %@,time === %@ - %@ - %@ - %@",date,year,month,day,time);
+                    [tempDictionary setObject:date forKey:@"groupTime"];
+                    [tempDictionary setObject:date forKey:@"date"];
+                    [tempDictionary setObject:year forKey:@"year"];
+                    [tempDictionary setObject:month forKey:@"month"];
+                    [tempDictionary setObject:day forKey:@"day"];
+                    [tempDictionary setObject:time forKey:@"time"];
+                    
+                }];
+                
+                [dataArray addObject:tempDictionary];
+                
+            }
+            [weakself showMBHud:request.responseJSONObject[@"msg"]];
+            
+            NSArray *pbaseArr = dataArray;
+            
+            NSMutableArray *addTempArray = [NSMutableArray array];
+            if (weakself.isRefresh) {
+                
+                addTempArray = dataArray;
+                [weakself.addArray removeAllObjects];
+                [weakself.addArray addObjectsFromArray:pbaseArr];
             }else{
                 
-                [self.tableView.mj_footer endRefreshing];
+                [weakself.marksArray removeAllObjects];
+                [weakself.addArray addObjectsFromArray:pbaseArr];
+                [addTempArray addObjectsFromArray:weakself.addArray];
             }
-            [self.dataArray addObjectsFromArray:[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:dataArray]];
-        }else if (_selectIndex == 2){
             
-            [self.dataArray addObjectsFromArray:[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:dataArray]];
-            if (self.isRefresh) {
+            NSMutableArray *dataArr = [NSMutableArray array];
+            
+            for (int j = 0; j < addTempArray.count; j++) {
                 
-                [self.tableView.mj_header endRefreshing];
+                NSString *title = [addTempArray[j] objectForKey:@"groupTime"];
+                
+                NSMutableArray *datalist = [@[] mutableCopy];
+                
+                NSMutableDictionary *dataDic = [@{} mutableCopy];
+                
+                [datalist addObject:addTempArray[j]];
+                
+                for (int k = j+1; k < addTempArray.count; k ++) {
+                    
+                    if ([title isEqualToString:[addTempArray[k] objectForKey:@"groupTime"]]) {
+                        
+                        [datalist addObject:addTempArray[k]];
+                        
+                        [addTempArray removeObjectAtIndex:k];
+                        
+                        k = k-1;
+                    }
+                    
+                }
+                
+                [dataDic setObject:title forKey:@"groupTime"];
+                [dataDic setObject:datalist forKey:@"datalist"];
+                [dataArr addObject:dataDic];
+                
+            }
+            
+            [weakself.sectionArray removeAllObjects];
+            [weakself.dataArray removeAllObjects];
+            
+            if (weakself.isRefresh) {
+                
+                [weakself.tableView.mj_header endRefreshing];
             }else{
                 
-                [self.tableView.mj_footer endRefreshing];
+                
+                if ([(NSArray *)dataArray count] == 0) {
+                    
+                    [weakself showMBHud:@"暂无更多数据！"];
+                }
+                [weakself.tableView.mj_footer endRefreshing];
             }
-        }
+            
+            [weakself.sectionArray addObjectsFromArray:[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:dataArr]];
+            
+            NSArray *tempArray = [[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:dataArr] valueForKey:@"datalist"];
+            
+            [weakself.dataArray addObjectsFromArray:[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:tempArray]];
+            
+            if (weakself.dataArray.count == 0) {
+                
+                weakself.noConnectionView = [[YMNoInternetConnection alloc]initWithFrame:Rect(0, 50+SCREEN_WIDTH/6+SCREEN_WIDTH/7+10, SCREEN_WIDTH, SCREEN_HEIGHT) andType:NO];
+                
+                [weakself.view addSubview:weakself.noConnectionView];
+            }
+            [weakself.tableView reloadData];
+            
+            
+        } failure:^(__kindof YTKBaseRequest *request) {
+            [weakself hiddenMBHud];
+            [weakself showMBHud:@"请检查网络连接"];
+            
+            weakself.noConnectionView = [[YMNoInternetConnection alloc]initWithFrame:Rect(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT)];
+            [weakself.view addSubview:weakself.noConnectionView];
+            [weakself.view bringSubviewToFront:weakself.noConnectionView];
+            weakself.noConnectionView.clickBlock = ^(){
+                
+                [weakself requestFromSever];
+                
+            };
+        }];
+    }else if (_selectIndex == 2){
         
-    } failure:^(__kindof YTKBaseRequest *request) {
-        [self hiddenMBHud];
+        YMHomeExpireAPI *expireAPI = [[YMHomeExpireAPI alloc] initStatus:@"1" andExpire:@"2" andPage:_pageIndex];
         
-        [weakself showMBHud:@"请检查网络连接"];
-    }];
+        [expireAPI startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+            
+            [weakself hiddenMBHud];
+            [weakself.noConnectionView hiddenNoConnectionView];
+            //        NSLog(@"data --- %@",request.responseJSONObject);
+            NSArray * tempArr = [request.responseJSONObject objectForKey:@"data"];
+            
+            NSMutableArray *dataArray = [NSMutableArray array];
+            
+            for (int i = 0; i<tempArr.count; i ++) {
+                
+                NSDictionary *tempDic = tempArr[i];
+                NSMutableDictionary *tempDictionary = [NSMutableDictionary dictionary];
+                
+                [tempDictionary setObject:tempDic[@"ref_id"] forKey:@"ref_id"];
+                [tempDictionary setObject:tempDic[@"salon_id"] forKey:@"salon_id"];
+                [tempDictionary setObject:tempDic[@"insert_time"] forKey:@"insert_time"];
+                [tempDictionary setObject:tempDic[@"type"] forKey:@"type"];
+                [tempDictionary setObject:tempDic[@"manager_id"] forKey:@"manager_id"];
+                [tempDictionary setObject:tempDic[@"customer_tip"] forKey:@"customer_tip"];
+                [tempDictionary setObject:tempDic[@"expire"] forKey:@"expire"];
+                [tempDictionary setObject:tempDic[@"name"] forKey:@"name"];
+                [tempDictionary setObject:tempDic[@"id"] forKey:@"id"];
+                [tempDictionary setObject:tempDic[@"customer_name"] forKey:@"customer_name"];
+                [tempDictionary setObject:tempDic[@"detail"] forKey:@"detail"];
+                [tempDictionary setObject:tempDic[@"customer_id"] forKey:@"customer_id"];
+                [tempDictionary setObject:tempDic[@"status"] forKey:@"status"];
+                
+                NSString *timeString = [tempArr[i] objectForKey:@"insert_time"];
+                
+                [weakself changeTime:timeString result:^(NSString*date, NSString *year, NSString *month, NSString *day, NSString*time) {
+                    
+                    //                NSLog(@"date - %@,time === %@ - %@ - %@ - %@",date,year,month,day,time);
+                    [tempDictionary setObject:date forKey:@"groupTime"];
+                    [tempDictionary setObject:date forKey:@"date"];
+                    [tempDictionary setObject:year forKey:@"year"];
+                    [tempDictionary setObject:month forKey:@"month"];
+                    [tempDictionary setObject:day forKey:@"day"];
+                    [tempDictionary setObject:time forKey:@"time"];
+                    
+                }];
+                
+                [dataArray addObject:tempDictionary];
+                
+            }
+            [weakself showMBHud:request.responseJSONObject[@"msg"]];
+            
+            NSArray *pbaseArr = dataArray;
+            
+            NSMutableArray *addTempArray = [NSMutableArray array];
+            if (weakself.isRefresh) {
+                
+                addTempArray = dataArray;
+                [weakself.addArray removeAllObjects];
+                [weakself.addArray addObjectsFromArray:pbaseArr];
+            }else{
+                
+                [weakself.marksArray removeAllObjects];
+                [weakself.addArray addObjectsFromArray:pbaseArr];
+                [addTempArray addObjectsFromArray:weakself.addArray];
+            }
+            
+            NSMutableArray *dataArr = [NSMutableArray array];
+            
+            for (int j = 0; j < addTempArray.count; j++) {
+                
+                NSString *title = [addTempArray[j] objectForKey:@"groupTime"];
+                
+                NSMutableArray *datalist = [@[] mutableCopy];
+                
+                NSMutableDictionary *dataDic = [@{} mutableCopy];
+                
+                [datalist addObject:addTempArray[j]];
+                
+                for (int k = j+1; k < addTempArray.count; k ++) {
+                    
+                    if ([title isEqualToString:[addTempArray[k] objectForKey:@"groupTime"]]) {
+                        
+                        [datalist addObject:addTempArray[k]];
+                        
+                        [addTempArray removeObjectAtIndex:k];
+                        
+                        k = k-1;
+                    }
+                    
+                }
+                
+                [dataDic setObject:title forKey:@"groupTime"];
+                [dataDic setObject:datalist forKey:@"datalist"];
+                [dataArr addObject:dataDic];
+                
+            }
+            
+            [weakself.sectionArray removeAllObjects];
+            [weakself.dataArray removeAllObjects];
+            
+            if (weakself.isRefresh) {
+                
+                [weakself.tableView.mj_header endRefreshing];
+            }else{
+                
+                
+                if ([(NSArray *)dataArray count] == 0) {
+                    
+                    [weakself showMBHud:@"暂无更多数据！"];
+                }
+                [weakself.tableView.mj_footer endRefreshing];
+            }
+            
+            [weakself.sectionArray addObjectsFromArray:[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:dataArr]];
+            
+            NSArray *tempArray = [[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:dataArr] valueForKey:@"datalist"];
+            
+            [weakself.dataArray addObjectsFromArray:[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:tempArray]];
+            
+            if (weakself.dataArray.count == 0) {
+                
+                weakself.noConnectionView = [[YMNoInternetConnection alloc]initWithFrame:Rect(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT) andType:NO];
+                
+                [weakself.view addSubview:weakself.noConnectionView];
+            }
+            [weakself.tableView reloadData];
+            
+            
+        } failure:^(__kindof YTKBaseRequest *request) {
+            [weakself hiddenMBHud];
+            [weakself showMBHud:@"请检查网络连接"];
+            
+            weakself.noConnectionView = [[YMNoInternetConnection alloc]initWithFrame:Rect(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT)];
+            [weakself.view addSubview:weakself.noConnectionView];
+            [weakself.view bringSubviewToFront:weakself.noConnectionView];
+            weakself.noConnectionView.clickBlock = ^(){
+                
+                [weakself requestFromSever];
+                
+            };
+        }];
+    }
     
 //    NSMutableArray *dataArray = [NSMutableArray arrayWithObjects:@{@"userID":@"1",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"2",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"3",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"4",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"5",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"6",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"十月"},@{@"userID":@"7",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"8",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"9",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"九月"},@{@"userID":@"10",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"11",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"十月"},@{@"userID":@"12",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"13",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"14",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"15",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"九月"}, nil];
     

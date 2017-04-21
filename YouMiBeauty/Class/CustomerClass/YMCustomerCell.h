@@ -11,7 +11,6 @@
 
 @interface YMCustomerCell : UITableViewCell
 @property(nonatomic,strong) UIView *backView;
-@property(nonatomic,strong) UIImageView *iconImage;
 @property(nonatomic,strong) UILabel *nameLabel;
 
 - (void)setCellForModel:(YMCustomerModel *)model;

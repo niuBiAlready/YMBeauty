@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "YMCustomNaviBarView.h"
 
+#import "YMNoInternetConnection.h"
+
 @interface YMBaseViewController : UIViewController
 @property (nonatomic, strong) YMCustomNaviBarView *viewNaviBar;
-
+@property (nonatomic, strong) YMNoInternetConnection *noConnectionView;
 - (void)bringNaviBarToTopmost;
 
 - (void)hideNaviBar:(BOOL)bIsHide;

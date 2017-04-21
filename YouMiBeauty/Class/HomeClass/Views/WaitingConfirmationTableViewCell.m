@@ -9,7 +9,12 @@
 #import "WaitingConfirmationTableViewCell.h"
 
 @implementation WaitingConfirmationTableViewCell
-
+// 今天是哪一天
+- (NSInteger)day:(NSDate *)date
+{
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date];
+    return [components day];
+}
 
 - (void)setModelForCell:(WaitingConfirmationModel *)model{
 
@@ -17,7 +22,19 @@
     _selectButton.selected = model.isSelected;
     _nameLabel.text = model.name;
     _descriptionLabel.text = model.detail;
-    _dateLabel.text = model.date;
+//    _dateLabel.text = model.date;
+    
+    if ([model.day integerValue] == [self day:[NSDate date]]) {
+        
+        _dateLabel.text = @"今天";
+    }else if ([model.day integerValue] == [self day:[NSDate date]] - 1){
+    
+        _dateLabel.text = @"昨天";
+    }else{
+    
+        _dateLabel.text = [NSString stringWithFormat:@"%@日",model.day];
+    }
+    
     _timeLabel.text = model.time;
     _statusLabel.text = model.status;
     [self setSubViews];
@@ -26,7 +43,17 @@
 
     _nameLabel.text = model.name;
     _descriptionLabel.text = model.detail;
-    _dateLabel.text = model.date;
+//    _dateLabel.text = model.date;
+    if ([model.day integerValue] == [self day:[NSDate date]]) {
+        
+        _dateLabel.text = @"今天";
+    }else if ([model.day integerValue] == [self day:[NSDate date]] - 1){
+        
+        _dateLabel.text = @"昨天";
+    }else{
+        
+        _dateLabel.text = [NSString stringWithFormat:@"%@日",model.day];
+    }
     _timeLabel.text = model.time;
     _statusLabel.text = model.status;
     

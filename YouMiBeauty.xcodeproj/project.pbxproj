@@ -39,6 +39,8 @@
 		EBA7EFDF1E71B4CB00D4FF86 /* YMBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EBA7EFDE1E71B4CB00D4FF86 /* YMBaseRequest.m */; };
 		EBABABCF1E2FB96600E94F2E /* YMBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBABABCE1E2FB96600E94F2E /* YMBaseViewController.m */; };
 		EBABABD21E2FB9C100E94F2E /* YMCustomNaviBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = EBABABD11E2FB9C100E94F2E /* YMCustomNaviBarView.m */; };
+		EBBC66011EA899AF00FAC426 /* YMNoInternetConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = EBBC66001EA899AF00FAC426 /* YMNoInternetConnection.m */; };
+		EBBC66041EA8C6A700FAC426 /* YMSearchTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = EBBC66031EA8C6A700FAC426 /* YMSearchTextField.m */; };
 		EBDA0A421E50BCAF00A96428 /* YMBeautyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA0A411E50BCAF00A96428 /* YMBeautyDetailViewController.m */; };
 		EBDA0A451E50BD6700A96428 /* YMBeautyDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBDA0A441E50BD6700A96428 /* YMBeautyDetailCell.m */; };
 		EBE3A5631E333F710098B5DD /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE3A5621E333F710098B5DD /* UIView+Extension.m */; };
@@ -168,6 +170,10 @@
 		EBABABD11E2FB9C100E94F2E /* YMCustomNaviBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMCustomNaviBarView.m; sourceTree = "<group>"; };
 		EBABABD41E2FBC7100E94F2E /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		EBABABD51E2FBC8F00E94F2E /* Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
+		EBBC65FF1EA899AF00FAC426 /* YMNoInternetConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMNoInternetConnection.h; sourceTree = "<group>"; };
+		EBBC66001EA899AF00FAC426 /* YMNoInternetConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMNoInternetConnection.m; sourceTree = "<group>"; };
+		EBBC66021EA8C6A700FAC426 /* YMSearchTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSearchTextField.h; sourceTree = "<group>"; };
+		EBBC66031EA8C6A700FAC426 /* YMSearchTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSearchTextField.m; sourceTree = "<group>"; };
 		EBDA0A401E50BCAF00A96428 /* YMBeautyDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMBeautyDetailViewController.h; sourceTree = "<group>"; };
 		EBDA0A411E50BCAF00A96428 /* YMBeautyDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMBeautyDetailViewController.m; sourceTree = "<group>"; };
 		EBDA0A431E50BD6700A96428 /* YMBeautyDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMBeautyDetailCell.h; sourceTree = "<group>"; };
@@ -599,6 +605,8 @@
 				EB0D53E91E31D78500445A76 /* UtilityFunc.m */,
 				EB51E6D91E5C90E7007F5D9B /* pinyin.c */,
 				EB51E6DA1E5C90E7007F5D9B /* pinyin.h */,
+				EBBC66021EA8C6A700FAC426 /* YMSearchTextField.h */,
+				EBBC66031EA8C6A700FAC426 /* YMSearchTextField.m */,
 			);
 			path = PublicClass;
 			sourceTree = "<group>";
@@ -629,6 +637,8 @@
 			children = (
 				EBABABD01E2FB9C100E94F2E /* YMCustomNaviBarView.h */,
 				EBABABD11E2FB9C100E94F2E /* YMCustomNaviBarView.m */,
+				EBBC65FF1EA899AF00FAC426 /* YMNoInternetConnection.h */,
+				EBBC66001EA899AF00FAC426 /* YMNoInternetConnection.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1081,6 +1091,7 @@
 				EB51E6DB1E5C90E7007F5D9B /* pinyin.c in Sources */,
 				EBE3A5841E33454A0098B5DD /* LCTabBarItem.m in Sources */,
 				EBE3A5801E33454A0098B5DD /* LCTabBarBadge.m in Sources */,
+				EBBC66041EA8C6A700FAC426 /* YMSearchTextField.m in Sources */,
 				EBE3A6811E3366590098B5DD /* MBProgressHUD.m in Sources */,
 				EBE3A7AB1E336F250098B5DD /* NSDataEx.m in Sources */,
 				EBE3A67E1E3366010098B5DD /* YMLoginViewController.m in Sources */,
@@ -1100,6 +1111,7 @@
 				EB7F0C731E3728CF00061A56 /* NSString+Size.m in Sources */,
 				EBE3A58B1E33496B0098B5DD /* YMHomeMainViewController.m in Sources */,
 				EB8F036D1E35EBC80081F5EC /* WaitingConfirmationTableViewCell.m in Sources */,
+				EBBC66011EA899AF00FAC426 /* YMNoInternetConnection.m in Sources */,
 				EB7F0C741E3728CF00061A56 /* YMTopBarView.m in Sources */,
 				EBE3A5631E333F710098B5DD /* UIView+Extension.m in Sources */,
 				EB0555781E3460E80004F9FE /* YMHomeViewController.m in Sources */,

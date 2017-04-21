@@ -11,3 +11,6 @@
 @implementation YMCustomerModel
 
 @end
+@implementation YMCosmetologist
+
+@end

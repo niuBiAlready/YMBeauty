@@ -124,7 +124,18 @@ static NSString *const ID = @"homeMainCollectionViewCellIdentifier";
         [weakself hiddenMBHud];
         NSLog(@"data --- %@",request.responseJSONObject);
         
-        [weakself showMBHud:request.responseJSONObject[@"msg"]];
+        NSString *code = request.responseJSONObject[@"code"];
+        if ([code integerValue] == -2) {
+            
+            YMLoginViewController *login =[YMLoginViewController new];
+            [weakself presentViewController:login animated:NO completion:^{
+                
+            }];
+        }else{
+        
+            [weakself showMBHud:request.responseJSONObject[@"msg"]];
+        }
+        
         
     } failure:^(__kindof YTKBaseRequest *request) {
         [self hiddenMBHud];

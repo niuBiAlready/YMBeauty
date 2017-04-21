@@ -75,7 +75,7 @@
     
     YMUserInfoData * userInfo = [[YMUserInfoMgr sharedInstance] getUserProfile];
     
-    userPhoneField.text = userInfo.phone;
+    userPhoneField.text = userInfo.phone.description;
     
     [self.view addSubview:userPhoneField];
     userPhoneField.delegate =self;
@@ -118,10 +118,9 @@
      */
     UITextField *passwordField = [UITextField new];
     passwordField.placeholder = @"请输入手机验证码";
-//    passwordField.inputAccessoryView = [self toolBar];
     passwordField.font = UIBaseFont(16);
     passwordField.delegate =self;//15006037330
-//    passwordField.secureTextEntry = YES;
+    passwordField.keyboardType =UIKeyboardTypeNumberPad;
     [self.view addSubview:passwordField];
     _passwordTextField = passwordField;
     

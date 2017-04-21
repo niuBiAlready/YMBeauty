@@ -176,20 +176,20 @@
     NSString *_status;
     NSString *_page;
 }
--(id)initStatus:(NSString*)status andPage:(NSString *)page
+-(id)initStatus:(NSString*)status andPage:(NSInteger )page
 {
     self =[super init];
     if (self) {
         
         _status = status;
-        _page   = page;
+        _page   = [NSString stringWithFormat:@"%ld",page];
         
     }
     return self;
 }
 -(NSString*)requestUrl
 {
-    return @"/record/recordIndex/searchManageStreamList.do";
+    return @"/record/recordIndex/searchSalonStreamList.do";
 }
 -(id)requestArgument
 {
@@ -203,6 +203,186 @@
                           @"salonId" :userInfo.salon_id,
                           @"status":_status,
                           @"page":_page
+                          };
+    [self.baseDic addEntriesFromDictionary:dic];
+    return [YMCommonUtils securityMethod:self.baseDic isSecurity:NO];
+}
+@end
+/**
+ 流水查询 - 流水明细
+ 
+ */
+@implementation YMHomeMoneyDetailAPI
+{
+    
+    NSString *_status;
+    NSString *_page;
+    NSString *_year;
+    NSString *_month;
+    NSString *_day;
+    
+}
+-(id)initStatus:(NSString*)status andYear:(NSInteger )year andMonth:(NSInteger )month andDay:(NSInteger )day andPage:(NSInteger)page
+{
+    self =[super init];
+    if (self) {
+        
+        _status = status;
+        _page   = [NSString stringWithFormat:@"%ld",page];
+        _year   = [NSString stringWithFormat:@"%ld",year];
+        _month  = [NSString stringWithFormat:@"%ld",month];
+        _day    = [NSString stringWithFormat:@"%ld",day];
+        
+    }
+    return self;
+}
+-(NSString*)requestUrl
+{
+    return @"/record/recordIndex/searchSalonStreamList.do";
+}
+-(id)requestArgument
+{
+    self.isUserinfo =TRUE;
+    self.isSecurity =FALSE;
+    
+    YMUserInfoData * userInfo = [[YMUserInfoMgr sharedInstance] getUserProfile];
+    
+    [super requestArgument];
+    NSDictionary *dic = @{
+                          @"salonId" :userInfo.salon_id,
+                          @"status":_status,
+                          @"page":_page,
+                          @"year":_year,
+                          @"month":_month,
+                          @"day":_day
+                          };
+    [self.baseDic addEntriesFromDictionary:dic];
+    return [YMCommonUtils securityMethod:self.baseDic isSecurity:NO];
+}
+@end
+
+/**
+ 流水查询 - 套餐到期
+ 
+ */
+@implementation YMHomeExpireAPI
+{
+    
+    NSString *_status;
+    NSString *_page;
+    NSString *_expire;
+    
+}
+-(id)initStatus:(NSString*)status andExpire:(NSString *)expire andPage:(NSInteger)page
+{
+    self =[super init];
+    if (self) {
+        
+        _status = status;
+        _page   = [NSString stringWithFormat:@"%ld",page];
+        _expire = expire;
+        
+    }
+    return self;
+}
+-(NSString*)requestUrl
+{
+    return @"/record/recordIndex/searchSalonStreamList.do";
+}
+-(id)requestArgument
+{
+    self.isUserinfo =TRUE;
+    self.isSecurity =FALSE;
+    
+    YMUserInfoData * userInfo = [[YMUserInfoMgr sharedInstance] getUserProfile];
+    
+    [super requestArgument];
+    NSDictionary *dic = @{
+                          @"salonId" :userInfo.salon_id,
+                          @"status":_status,
+                          @"page":_page,
+                          @"expire":_expire
+                          };
+    [self.baseDic addEntriesFromDictionary:dic];
+    return [YMCommonUtils securityMethod:self.baseDic isSecurity:NO];
+}
+@end
+
+/*******************************************/
+//美容师
+/**
+ 美容师
+ */
+@implementation YMCosmetologistAPI
+{
+    NSString *_name;
+    
+}
+-(id)initName:(NSString *)name
+{
+    self =[super init];
+    if (self) {
+        
+        _name   = name;
+        
+    }
+    return self;
+}
+-(NSString*)requestUrl
+{
+    return @"/core/baseIndex/searchSalonManagerList.do";
+}
+-(id)requestArgument
+{
+    self.isUserinfo =TRUE;
+    self.isSecurity =FALSE;
+    
+    YMUserInfoData * userInfo = [[YMUserInfoMgr sharedInstance] getUserProfile];
+    
+    [super requestArgument];
+    NSDictionary *dic = @{
+                          @"salonId" :userInfo.salon_id,
+                          @"name":_name,
+                          };
+    [self.baseDic addEntriesFromDictionary:dic];
+    return [YMCommonUtils securityMethod:self.baseDic isSecurity:NO];
+}
+@end
+/*******************************************/
+//客户
+/**
+ 客户
+ */
+@implementation YMCustomerAPI
+{
+    NSString *_name;
+    
+}
+-(id)initName:(NSString *)name
+{
+    self =[super init];
+    if (self) {
+        
+        _name   = name;
+        
+    }
+    return self;
+}
+-(NSString*)requestUrl
+{
+    return @"/core/baseIndex/searchSalonCustomerList.do";
+}
+-(id)requestArgument
+{
+    self.isUserinfo =TRUE;
+    self.isSecurity =FALSE;
+    
+    YMUserInfoData * userInfo = [[YMUserInfoMgr sharedInstance] getUserProfile];
+    
+    [super requestArgument];
+    NSDictionary *dic = @{
+                          @"salonId" :userInfo.salon_id,
+                          @"name":_name,
                           };
     [self.baseDic addEntriesFromDictionary:dic];
     return [YMCommonUtils securityMethod:self.baseDic isSecurity:NO];

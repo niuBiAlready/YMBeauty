@@ -47,5 +47,41 @@
  流水查询 - 等待确认
  */
 @interface YMHomeWaitingForConfirmationAPI : YMBaseRequest
-- (id)initStatus:(NSString*)status andPage:(NSString *)page;
+- (id)initStatus:(NSString*)status andPage:(NSInteger)page;
 @end
+/**
+ 流水查询 - 流水明细
+ */
+@interface YMHomeMoneyDetailAPI : YMBaseRequest
+- (id)initStatus:(NSString*)status andYear:(NSInteger )year andMonth:(NSInteger )month andDay:(NSInteger )day andPage:(NSInteger)page;
+@end
+
+/**
+ 流水查询 - 套餐到期
+ */
+@interface YMHomeExpireAPI : YMBaseRequest
+- (id)initStatus:(NSString*)status andExpire:(NSString *)expire andPage:(NSInteger)page;
+@end
+
+
+/*******************************************/
+//美容师
+/**
+ 美容师
+ */
+@interface YMCosmetologistAPI : YMBaseRequest
+- (id)initName:(NSString*)name;
+@end
+
+/*******************************************/
+//客户
+/**
+ 客户
+ */
+@interface YMCustomerAPI : YMBaseRequest
+- (id)initName:(NSString*)name;
+@end
+
+
+
+
