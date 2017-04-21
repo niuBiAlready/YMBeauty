@@ -65,6 +65,7 @@
 }
 - (void)ClickToDo:(UIButton *)sender{
 
+    [_searchText resignFirstResponder];
     if (_searchAction) {
         _searchAction(_searchText.text);
     }

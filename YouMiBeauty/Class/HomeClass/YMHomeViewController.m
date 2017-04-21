@@ -742,7 +742,7 @@
                 [dataArray addObject:tempDictionary];
                 
             }
-            [weakself showMBHud:request.responseJSONObject[@"msg"]];
+//            [weakself showMBHud:request.responseJSONObject[@"msg"]];
             
             NSArray *pbaseArr = dataArray;
             
@@ -814,7 +814,7 @@
             
             if (weakself.dataArray.count == 0) {
                 
-                weakself.noConnectionView = [[YMNoInternetConnection alloc]initWithFrame:Rect(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT) andType:NO];
+                weakself.noConnectionView = [[YMNoInternetConnection alloc]initWithFrame:Rect(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT) andType:EFNoData];
                 
                 [weakself.view addSubview:weakself.noConnectionView];
             }
@@ -825,7 +825,7 @@
             [weakself hiddenMBHud];
             [weakself showMBHud:@"请检查网络连接"];
             
-            weakself.noConnectionView = [[YMNoInternetConnection alloc]initWithFrame:Rect(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT)];
+            weakself.noConnectionView = [[YMNoInternetConnection alloc]initWithFrame:Rect(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT) andType:EFNoInternet];
             [weakself.view addSubview:weakself.noConnectionView];
             [weakself.view bringSubviewToFront:weakself.noConnectionView];
             weakself.noConnectionView.clickBlock = ^(){
@@ -843,7 +843,7 @@
             
             [weakself hiddenMBHud];
             [weakself.noConnectionView hiddenNoConnectionView];
-            //        NSLog(@"data --- %@",request.responseJSONObject);
+//        NSLog(@"data --- %@",request.responseJSONObject);
             NSArray * tempArr = [request.responseJSONObject objectForKey:@"data"];
             
             NSMutableArray *dataArray = [NSMutableArray array];
@@ -884,7 +884,7 @@
                 [dataArray addObject:tempDictionary];
                 
             }
-            [weakself showMBHud:request.responseJSONObject[@"msg"]];
+//            [weakself showMBHud:request.responseJSONObject[@"msg"]];
             
             NSArray *pbaseArr = dataArray;
             
@@ -956,7 +956,7 @@
             
             if (weakself.dataArray.count == 0) {
                 
-                weakself.noConnectionView = [[YMNoInternetConnection alloc]initWithFrame:Rect(0, 50+SCREEN_WIDTH/6+SCREEN_WIDTH/7+10, SCREEN_WIDTH, SCREEN_HEIGHT) andType:NO];
+                weakself.noConnectionView = [[YMNoInternetConnection alloc]initWithFrame:Rect(0, 50+SCREEN_WIDTH/6+SCREEN_WIDTH/7+10, SCREEN_WIDTH, SCREEN_HEIGHT) andType:EFNoData];
                 
                 [weakself.view addSubview:weakself.noConnectionView];
             }
@@ -967,7 +967,7 @@
             [weakself hiddenMBHud];
             [weakself showMBHud:@"请检查网络连接"];
             
-            weakself.noConnectionView = [[YMNoInternetConnection alloc]initWithFrame:Rect(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT)];
+            weakself.noConnectionView = [[YMNoInternetConnection alloc]initWithFrame:Rect(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT) andType:EFNoInternet];
             [weakself.view addSubview:weakself.noConnectionView];
             [weakself.view bringSubviewToFront:weakself.noConnectionView];
             weakself.noConnectionView.clickBlock = ^(){
@@ -1012,7 +1012,7 @@
                 
                 [weakself changeTime:timeString result:^(NSString*date, NSString *year, NSString *month, NSString *day, NSString*time) {
                     
-                    //                NSLog(@"date - %@,time === %@ - %@ - %@ - %@",date,year,month,day,time);
+    //                NSLog(@"date - %@,time === %@ - %@ - %@ - %@",date,year,month,day,time);
                     [tempDictionary setObject:date forKey:@"groupTime"];
                     [tempDictionary setObject:date forKey:@"date"];
                     [tempDictionary setObject:year forKey:@"year"];
@@ -1025,7 +1025,7 @@
                 [dataArray addObject:tempDictionary];
                 
             }
-            [weakself showMBHud:request.responseJSONObject[@"msg"]];
+//            [weakself showMBHud:request.responseJSONObject[@"msg"]];
             
             NSArray *pbaseArr = dataArray;
             
@@ -1097,7 +1097,7 @@
             
             if (weakself.dataArray.count == 0) {
                 
-                weakself.noConnectionView = [[YMNoInternetConnection alloc]initWithFrame:Rect(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT) andType:NO];
+                weakself.noConnectionView = [[YMNoInternetConnection alloc]initWithFrame:Rect(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT) andType:EFNoData];
                 
                 [weakself.view addSubview:weakself.noConnectionView];
             }
@@ -1108,7 +1108,7 @@
             [weakself hiddenMBHud];
             [weakself showMBHud:@"请检查网络连接"];
             
-            weakself.noConnectionView = [[YMNoInternetConnection alloc]initWithFrame:Rect(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT)];
+            weakself.noConnectionView = [[YMNoInternetConnection alloc]initWithFrame:Rect(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT) andType:EFNoInternet];
             [weakself.view addSubview:weakself.noConnectionView];
             [weakself.view bringSubviewToFront:weakself.noConnectionView];
             weakself.noConnectionView.clickBlock = ^(){
@@ -1118,111 +1118,6 @@
             };
         }];
     }
-    
-//    NSMutableArray *dataArray = [NSMutableArray arrayWithObjects:@{@"userID":@"1",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"2",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"3",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"4",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"5",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"6",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"十月"},@{@"userID":@"7",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"8",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"9",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"九月"},@{@"userID":@"10",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"11",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"十月"},@{@"userID":@"12",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"13",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"14",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"本月"},@{@"userID":@"15",@"name":@"李志斌",@"descriptionText":@"开背|开胸|电疗背|颈护",@"status":@"等待确认",@"date":@"今天",@"time":@"10.14",@"groupTime":@"九月"}, nil];
-    
-    
-//    if (_currentIndex == 0) {
-//        
-//        __weak typeof(self) weakself = self;
-//        
-//        NSArray *pbaseArr = dataArray;
-//        
-//        NSMutableArray *addTempArray = [NSMutableArray array];
-//        if (weakself.isRefresh) {
-//            
-//            addTempArray = dataArray;
-//            [weakself.addArray removeAllObjects];
-//            [weakself.addArray addObjectsFromArray:pbaseArr];
-//        }else{
-//            
-//            [weakself.marksArray removeAllObjects];
-//            [weakself.addArray addObjectsFromArray:pbaseArr];
-//            [addTempArray addObjectsFromArray:weakself.addArray];
-//        }
-//        
-//        NSMutableArray *dataArr = [NSMutableArray array];
-//        
-//        for (int j = 0; j < addTempArray.count; j++) {
-//            
-//            NSString *title = [addTempArray[j] objectForKey:@"groupTime"];
-//            
-//            NSMutableArray *datalist = [@[] mutableCopy];
-//            
-//            NSMutableDictionary *dataDic = [@{} mutableCopy];
-//            
-//            [datalist addObject:addTempArray[j]];
-//            
-//            for (int k = j+1; k < addTempArray.count; k ++) {
-//                
-//                if ([title isEqualToString:[addTempArray[k] objectForKey:@"groupTime"]]) {
-//                    
-//                    [datalist addObject:addTempArray[k]];
-//                    
-//                    [addTempArray removeObjectAtIndex:k];
-//                    
-//                    k = k-1;
-//                }
-//                
-//            }
-//            
-//            [dataDic setObject:title forKey:@"groupTime"];
-//            [dataDic setObject:datalist forKey:@"datalist"];
-//            [dataArr addObject:dataDic];
-//            
-//        }
-//        
-//        [weakself.sectionArray removeAllObjects];
-//        [weakself.dataArray removeAllObjects];
-//        
-//        if (weakself.isRefresh) {
-//            
-//            [weakself.tableView.mj_header endRefreshing];
-//        }else{
-//            
-//            
-//            if ([(NSArray *)dataArray count] == 0) {
-//                
-//                [weakself showMBHud:@"暂无更多数据！"];
-//            }
-//            [weakself.tableView.mj_footer endRefreshing];
-//        }
-//        
-//        [weakself.sectionArray addObjectsFromArray:[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:dataArr]];
-//        
-//        NSArray *tempArray = [[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:dataArr] valueForKey:@"datalist"];
-//        
-//        [weakself.dataArray addObjectsFromArray:[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:tempArray]];
-//        
-//        if (weakself.dataArray.count == 0) {
-//            
-//            //        weakself.noConnectionView = [[LQNoInternetConnection alloc]initWithFrame:Rect(0, ViewBavBarH+45, SCREEN_WIDTH, SCREEN_HEIGHT) andType:NO];
-//            //
-//            //        [weakself.view addSubview:weakself.noConnectionView];
-//        }
-//        [weakself.tableView reloadData];
-//    }else if (_currentIndex == 1){
-//    
-//        if (self.isRefresh) {
-//            
-//            [self.tableView.mj_header endRefreshing];
-//        }else{
-//            
-//            [self.tableView.mj_footer endRefreshing];
-//        }
-//        [self.dataArray addObjectsFromArray:[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:dataArray]];
-//    }else if (_currentIndex == 2){
-//    
-//        [self.dataArray addObjectsFromArray:[WaitingConfirmationModel mj_objectArrayWithKeyValuesArray:dataArray]];
-//        if (self.isRefresh) {
-//            
-//            [self.tableView.mj_header endRefreshing];
-//        }else{
-//            
-//            [self.tableView.mj_footer endRefreshing];
-//        }
-//    }
-    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

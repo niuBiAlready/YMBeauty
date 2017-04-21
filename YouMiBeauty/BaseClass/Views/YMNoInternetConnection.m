@@ -20,7 +20,7 @@
 
 @implementation YMNoInternetConnection
 
-- (instancetype)initWithFrame:(CGRect)frame andType:(NoDataAndNoInternet)noConOrnoData//yes 无网络 no无数据
+- (instancetype)initWithFrame:(CGRect)frame andType:(NoDataAndNoInternet)noConOrnoData
 {
     self = [super initWithFrame:frame];
     if (self) {
